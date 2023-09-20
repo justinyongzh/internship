@@ -30,6 +30,6 @@ button.addEventListener('click', function() {
     //   return;
     // }
     // Redirect to another HTML page
-       window.location.href = 'home.html';
+       window.location.href = '../../templates/home.html';
     
 });
