@@ -90,6 +90,8 @@ def viewStudentInfo():
     cursor = db_conn.cursor()
     cursor.execute(statement)
     result = cursor.fetchall()
+    cursor.close()
+    
     return render_template('display_studInfo.html', data=result)
 
 @app.route('/display_studInfoDetails/<stud_id>')
