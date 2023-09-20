@@ -30,6 +30,10 @@ db_conn = connections.Connection(
 def index():
     return render_template('index.html')
 
+@app.route("/homepage")
+def homepage():
+    return render_template('home.html')
+
 # @app.route("/searchStudent", methods=['GET', 'POST'])
 # def searchEmp():
 #     return render_template('searchStudent.html')
