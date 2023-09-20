@@ -34,6 +34,34 @@ def index():
 def homepage():
     return render_template('home.html')
 
+@app.route("/aboutpage", methods=['GET', 'POST'])
+def aboutpage():
+    return render_template('about.html')
+
+@app.route("/featurepage", methods=['GET', 'POST'])
+def featurepage():
+    return render_template('feature.html')
+
+@app.route("/contactpage", methods=['GET', 'POST'])
+def contactpage():
+    return render_template('contact.html')
+
+@app.route("/coursepage", methods=['GET', 'POST'])
+def coursepage():
+    return render_template('course.html')
+
+@app.route("/indexpage", methods=['GET', 'POST'])
+def indexpage():
+    return render_template('index.html')
+
+@app.route("/teampage", methods=['GET', 'POST'])
+def teampage():
+    return render_template('team.html')
+
+@app.route("/testimonialpage", methods=['GET', 'POST'])
+def testimonialpage():
+    return render_template('testimonial.html')
+
 @app.route("/studentInfo", methods=['GET', 'POST'])
 def studentInfo():
     return render_template('display_studInfo.html')
