@@ -84,7 +84,7 @@ def studentInfo():
 #     return render_template('student_info.html', rows=rows)
 
 
-@app.route("/display_studInfo", methods=['GET'])
+@app.route("/displaystudInfo", methods=['GET'])
 def viewStudentInfo():
     statement = "SELECT s.* FROM student s JOIN company c ON s.com_id = c.com_id WHERE s.com_id = 'C0001';"
     cursor = db_conn.cursor()
