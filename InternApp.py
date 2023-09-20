@@ -35,7 +35,7 @@ def homepage():
     return render_template('home.html')
 
 @app.route("/display_studInfo", methods=['GET', 'POST'])
-def homepage():
+def studentInfo():
     return render_template('display_studInfo.html')
 
 # @app.route("/searchStudent", methods=['GET', 'POST'])
