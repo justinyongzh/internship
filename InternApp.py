@@ -62,9 +62,9 @@ def teampage():
 def testimonialpage():
     return render_template('testimonial.html')
 
-@app.route("/studentInfo", methods=['GET', 'POST'])
-def studentInfo():
-    return render_template('display_studInfo.html')
+# @app.route("/studentInfo", methods=['GET', 'POST'])
+# def studentInfo():
+#     return render_template('display_studInfo.html')
 
 # @app.route("/searchStudent", methods=['GET', 'POST'])
 # def searchEmp():
@@ -84,7 +84,7 @@ def studentInfo():
 #     return render_template('student_info.html', rows=rows)
 
 
-@app.route("/displaystudInfo", methods=['GET'])
+@app.route("/displaystudInfo", methods=['GET', 'POST'])
 def viewStudentInfo():
     statement = "SELECT s.* FROM student s JOIN company c ON s.com_id = c.com_id WHERE s.com_id = 'C0001';"
     cursor = db_conn.cursor()
