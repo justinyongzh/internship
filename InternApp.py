@@ -1,14 +1,14 @@
 # from curses import flash
 # from flask_wtf.csrf import CSRFProtect, CSRFError
+from io import BytesIO
 from flask import Flask, render_template, request, redirect, flash, jsonify
 from pymysql import connections
 import os
 import boto3
 import botocore
+from flask import send_file
 # import pdfplumber
 # Use BytesIO to handle the binary content
-# from io import BytesIO
-# from flask import send_file
 # from werkzeug.utils import secure_filename
 from config import *
 
@@ -99,9 +99,45 @@ def viewStudentInfoDetails(stud_id):
     statement = "SELECT * FROM student s WHERE stud_id = %s"
     cursor = db_conn.cursor()
     cursor.execute(statement, (stud_id,))
-    result = cursor.fetchone() #Assuming there's only one student with the given ID
+    result = cursor.fetchone()
             
     return render_template('display_studInfoDetails.html', student=result)
+
+
+@app.route('/displayStudResume/<stud_id>')
+def displayStudentResume(stud_id):
+    statement = "SELECT * FROM student s WHERE stud_id = %s"
+    cursor = db_conn.cursor()
+    cursor.execute(statement, (stud_id,))
+    result = cursor.fetchone()
+
+    # Construct the S3 key for the resume
+    resume_key = "stud_id-" + str(stud_id) + "_pdf"
+
+    # Initialize the S3 client
+    s3 = boto3.client('s3', region_name=region)
+
+    try:
+        with BytesIO() as resume_buffer:
+            s3.download_fileobj(bucket, resume_key, resume_buffer)
+            resume_buffer.seek(0)
+
+        try:
+            # Return the PDF file as an attachment
+            return send_file(
+                resume_buffer,
+                as_attachment=True,
+                download_name="resume_" + str(stud_id) + "_pdf",
+                mimetype='application/pdf'
+            )
+                    
+        except Exception as e:
+            return f"An error occurred: {str(e)}", 500
+        
+    finally:
+        cursor.close()
+    
+    return render_template('display_resume.html', student=result)
 
 # @app.route("/", methods=['GET', 'POST'])
 # def home():
@@ -165,4 +201,3 @@ def viewStudentInfoDetails(stud_id):
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
-
