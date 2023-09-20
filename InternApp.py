@@ -86,7 +86,7 @@ def studentInfo():
 
 @app.route("/display_studInfo", methods=['GET'])
 def viewStudentInfo():
-    statement = "SELECT s.* FROM student s JOIN Company c ON s.com_id = c.com_id WHERE s.com_id = 1;"
+    statement = "SELECT s.* FROM student s JOIN Company c ON s.com_id = c.com_id WHERE s.com_id = C0001;"
     cursor = db_conn.cursor()
     cursor.execute(statement)
     result = cursor.fetchall()
