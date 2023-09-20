@@ -94,7 +94,7 @@ def viewStudentInfo():
     
     return render_template('display_studInfo.html', data=result)
 
-@app.route('/display_studInfoDetails/<stud_id>')
+@app.route('/displayStudInfoDetails/<stud_id>')
 def viewStudentInfoDetails(stud_id):
     statement = "SELECT * FROM student s WHERE stud_id = %s"
     cursor = db_conn.cursor()
