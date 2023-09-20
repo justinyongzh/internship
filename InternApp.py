@@ -1,15 +1,15 @@
-from curses import flash
+# from curses import flash
 # from flask_wtf.csrf import CSRFProtect, CSRFError
 from flask import Flask, render_template, request, redirect, flash, jsonify
 from pymysql import connections
 import os
 import boto3
 import botocore
-import pdfplumber
+# import pdfplumber
 # Use BytesIO to handle the binary content
-from io import BytesIO
-from flask import send_file
-from werkzeug.utils import secure_filename
+# from io import BytesIO
+# from flask import send_file
+# from werkzeug.utils import secure_filename
 from config import *
 
 app = Flask(__name__)
