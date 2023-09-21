@@ -122,6 +122,7 @@ def displayStudentResume(stud_id):
 
     try:
         with BytesIO() as resume_buffer:
+            print("resume_buffer", resume_buffer)
             s3.download_fileobj(bucket, resume_key, resume_buffer)
             resume_buffer.seek(0)
 
