@@ -133,10 +133,9 @@ def displayStudentResume(stud_id):
                 download_name="resume_" + str(stud_id) + "_pdf",
                 mimetype='application/pdf'
             )
-                    
+            
         except Exception as e:
             return f"An error occurred: {str(e)}", 500
-        
     finally:
         cursor.close()
     
