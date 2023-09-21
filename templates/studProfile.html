@@ -52,11 +52,11 @@
                         <div class="card shadow-sm">
                           <div class="card-header bg-transparent text-center">
                             <img class="profile_img" src="https://source.unsplash.com/600x300/?student" alt="student dp">
-                            <h3>{{ stud_name }}</h3>
+                            <h3>{{ student[1] }}</h3>
                           </div>
                           <div class="card-body">
-                            <p class="mb-0"><strong class="pr-1">Student ID:</strong>{{ stud_id }}</p>
-                            <p class="mb-0"><strong class="pr-1">Programme :</strong>{{ stud_programme }}</p>
+                            <p class="mb-0"><strong class="pr-1">Student ID:</strong>{{ student[0] }}</p>
+                            <p class="mb-0"><strong class="pr-1">Programme :</strong>{{ student[8] }}</p>
                           </div>
                         </div>
                       </div>
@@ -71,28 +71,28 @@
                                 <th width="30%">Gender</th>
                                 <td width="2%">:</td>
                                 <td>
-                                  {{ stud_gender }}
+                                  {{ student[2] }}
                                 </td>
                               </tr>
                               <tr>
                                 <th width="30%">NRIC No</th>
                                 <td width="2%">:</td>
-                                <td>{{ stud_IC }}</td>
+                                <td>{{ student[3] }}</td>
                               </tr>
                               <tr>
                                 <th width="30%">Email</th>
                                 <td width="2%">:</td>
-                                <td>{{ stud_email }}</td>
+                                <td>{{ student[4] }}</td>
                               </tr>
                               <tr>
                                 <th width="30%">Mobile No</th>
                                 <td width="2%">:</td>
-                                <td>{{ stud_HP }}</td>
+                                <td>{{ student[5] }}</td>
                               </tr>
                               <tr>
                                 <th width="30%">Address</th>
                                 <td width="2%">:</td>
-                                <td>{{ stud_address }}</td>
+                                <td>{{ student[7] }}</td>
                               </tr>
                             </table>
                           </div>
