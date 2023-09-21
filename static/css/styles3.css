@@ -8231,12 +8231,12 @@ h1, h2, h3, h4, h5,
     -moz-box-shadow: 0px 12px 20px -6px rgba(0, 0, 0, 0.21);
     box-shadow: 0px 12px 20px -6px rgba(0, 0, 0, 0.21); }
   .btn.btn-primary {
-    background: #6807f9;
-    border-color: #6807f9;
+    background: #2878EB;
+    border-color: #2878EB;
     color: #fff; }
     .btn.btn-primary:hover, .btn.btn-primary:focus {
-      border-color: #5305c8 !important;
-      background: #5305c8 !important; }
+      border-color: #135fcd !important;
+      background: #135fcd !important; }
     .btn.btn-primary.btn-link {
       background: transparent;
       color: #fff;
