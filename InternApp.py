@@ -115,29 +115,31 @@ def displayStudentResume(stud_id):
     result = cursor.fetchone()
 
     # Construct the S3 key for the resume
-    resume_key = "stud_id-" + str(stud_id) + "_pdf.pdf"
+    resume_key = "stud_id-" + str(stud_id) + "_pdf"
 
     # Initialize the S3 client
     s3 = boto3.client('s3', region_name=region)
 
     try:
-        with BytesIO() as resume_buffer:
-            print("resume_buffer", resume_buffer)
-            s3.download_fileobj(bucket, resume_key, resume_buffer)
-            resume_buffer.seek(0)
+        # Get the S3 object
+        s3_object = s3.get_object(Bucket=bucket, Key=resume_key)
 
-        try:
-            # Return the PDF file as an attachment
-            return send_file(
-                resume_buffer,
-                as_attachment=True,
-                download_name="resume_" + str(stud_id) + "_pdf",
-                mimetype='application/pdf'
-            )
-                    
-        except Exception as e:
-            return f"An error occurred: {str(e)}", 500
-        
+        # Set response headers for PDF download
+        response_headers = {
+            'Content-Type': 'application/pdf',
+            'Content-Disposition': f'attachment; filename=resume_{stud_id}_pdf'
+        }
+
+        # Stream the S3 object content directly to the response
+        return Response(
+            s3_object['Body'].read(),
+            headers=response_headers,
+            status=200
+        )
+
+    except Exception as e:
+        return f"An error occurred: {str(e)}", 500
+
     finally:
         cursor.close()
     
