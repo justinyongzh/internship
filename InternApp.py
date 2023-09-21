@@ -138,8 +138,7 @@ def displayStudentResume(stud_id):
             return f"An error occurred: {str(e)}", 500
     finally:
         cursor.close()
-    
-    return render_template('display_resume.html', student=result)
+        return render_template('display_resume.html', student=result)
 
 # @app.route("/", methods=['GET', 'POST'])
 # def home():
