@@ -137,8 +137,8 @@ def displayStudentResume(stud_id):
         except Exception as e:
             return f"An error occurred: {str(e)}", 500
         
-        finally:
-            cursor.close()
+    finally:
+        cursor.close()
     
     return render_template('display_resume.html', student=result)
 
