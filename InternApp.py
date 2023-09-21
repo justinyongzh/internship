@@ -202,6 +202,15 @@ def displayStudentResume(stud_id):
 #     return render_template('AddEmpOutput.html', name=emp_name)
 
 
+@app.route("/lecturerDisplayStudInfo", methods=['GET', 'POST'])
+def lecturerViewStudentInfo():
+    statement = "SELECT s.* FROM student s JOIN lecturer l ON s.lec_id = l.lec_id WHERE s.lec_id = 'L0001';"
+    cursor = db_conn.cursor()
+    cursor.execute(statement)
+    result = cursor.fetchall()
+    cursor.close()
+    
+    return render_template('lec_displayStudInfo.html', data=result)
 
 
 @app.route("/studProfile/<stud_id>", methods=['GET', 'POST'])
