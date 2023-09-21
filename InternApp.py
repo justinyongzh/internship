@@ -126,6 +126,9 @@ def displayStudentResume(stud_id):
             resume_buffer.seek(0)
 
         try:
+            # Convert student[9] (URL) to a string
+            student_url = str(result[9])
+            
             # Return the PDF file as an attachment
             return send_file(
                 resume_buffer,
