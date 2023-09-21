@@ -131,7 +131,7 @@ def displayStudentResume(stud_id):
             return send_file(
                 resume_buffer,
                 as_attachment=True,
-                download_name="resume_" + str(stud_id) + "_pdf",
+                download_name="resume_" + str(stud_id) + "_pdf.pdf",
                 mimetype='application/pdf'
             )
                     
