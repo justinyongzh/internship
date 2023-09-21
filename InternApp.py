@@ -115,7 +115,7 @@ def displayStudentResume(stud_id):
     result = cursor.fetchone()
 
     # Construct the S3 key for the resume
-    resume_key = "stud_id-" + str(stud_id) + "_pdf"
+    resume_key = "stud_id-" + str(stud_id) + "_pdf.pdf"
 
     # Initialize the S3 client
     s3 = boto3.client('s3', region_name=region)
@@ -131,7 +131,7 @@ def displayStudentResume(stud_id):
             return send_file(
                 resume_buffer,
                 as_attachment=True,
-                download_name="resume_" + str(stud_id) + "_pdf.pdf",
+                download_name="resume_" + str(stud_id) + "_pdf",
                 mimetype='application/pdf'
             )
                     
