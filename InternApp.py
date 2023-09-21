@@ -245,5 +245,16 @@ def preview_file(stud_id):
         return "Resume not found"
 
 
+@app.route("/displayComInfo", methods=['GET', 'POST'])
+def viewCompanyInfo():
+    statement = "SELECT * FROM company WHERE status = 0;"
+    cursor = db_conn.cursor()
+    cursor.execute(statement)
+    result = cursor.fetchall()
+    cursor.close()
+    
+    return render_template('admin.html', data=result)
+
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
