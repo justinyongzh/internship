@@ -1,7 +1,7 @@
 # diongziyu-internship
 
 Commands for EC2 Connect:
-*First time*
+*First time*\n
 sudo su
 rm -rf diongziyu-internship
 git clone https://github.com/diongzy/diongziyu-internship.git
