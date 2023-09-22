@@ -177,7 +177,7 @@ def login_post():
 #     return render_template('display_studInfo.html', data=result)
 
 @app.route("/displayStudInfo", methods=['GET', 'POST'])
-def viewStudentInfo(username):
+def viewStudentInfo():
     username = session.get('username')
 
     if username:
