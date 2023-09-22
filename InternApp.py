@@ -99,7 +99,7 @@ def searchStudProcess():
     cursor = db_conn.cursor()
 
     cursor.execute(search_sql, (stud_id))
-    rows = cursor.fetchone()
+    rows = cursor.fetchall()
 
     if rows:
         return render_template('display_searchStudInfo.html', rows=rows)
