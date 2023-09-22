@@ -23,7 +23,6 @@ db_conn = connections.Connection(
     user=customuser,
     password=custompwd,
     db=customdb
-
 )
 
 output = {}
@@ -185,7 +184,7 @@ def viewStudentInfo():
         statement = "SELECT s.* FROM student s JOIN company c ON s.com_id = c.com_id WHERE s.com_id = %s;"
     
         cursor = db_conn.cursor()
-        cursor.execute(statement)
+        cursor.execute(statement, (username,))
         result = cursor.fetchall()
         cursor.close()
     
