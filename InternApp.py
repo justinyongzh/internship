@@ -164,40 +164,23 @@ def viewStudentInfoDetails(stud_id):
 
 @app.route('/displayStudResume/<stud_id>')
 def displayStudentResume(stud_id):
-    statement = "SELECT * FROM student s WHERE stud_id = %s"
-    cursor = db_conn.cursor()
-    cursor.execute(statement, (stud_id,))
-    result = cursor.fetchone()
-
-    # Construct the S3 key for the resume
-    resume_key = "stud_id-" + str(stud_id) + "_pdf"
-
-    # Initialize the S3 client
-    s3 = boto3.client('s3', region_name=region)
-
     try:
-        with BytesIO() as resume_buffer:
-            s3.download_fileobj(bucket, resume_key, resume_buffer)
-            resume_buffer.seek(0)
-
-        try:
-            student_url = result[9]
-            if isinstance(student_url, bytes):
-                student_url = student_url.decode('utf-8')
-            
-            # Return the PDF file as an attachment
-            return send_file(
-                resume_buffer,
-                as_attachment=True,
-                download_name="resume_" + str(stud_id) + "_pdf",
-                mimetype='application/pdf'
-            )
-            
-        except Exception as e:
-            return f"An error occurred: {str(e)}", 500
-    finally:
-        cursor.close()
-        return render_template('display_resume.html', student=result)
+        statement = "SELECT stud_id, stud_resume FROM student s WHERE stud_id = %s"
+        cursor = db_conn.cursor()
+        cursor.execute(statement, (stud_id,))
+        result = cursor.fetchone()
+    
+        if result: 
+            studID, resume = result
+            resume = "https://" + bucket + ".s3.amazonaws.com/stud_id-" + studID + "_pdf.pdf"
+            return render_template('display_resume.html', result=result, resume=resume)
+        
+        else: 
+            return "Invalid student."
+        
+    except Exception as e:
+        print("Database error:", str(e))
+        return None  # Access denied in case of an error
 
 # @app.route("/", methods=['GET', 'POST'])
 # def home():
