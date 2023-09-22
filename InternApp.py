@@ -130,7 +130,7 @@ def authenticate_user(username, password):
                 elif user_role == 'STUDENT':
                     return 'student.html' # CHANGE BASED ON IMPLEMENTATION
                 elif user_role == 'COMPANY':
-                    return 'company.html' # CHANGE BASED ON IMPLEMENTATION
+                    return 'display_studInfo.html' # CHANGE BASED ON IMPLEMENTATION
                 elif user_role == 'MASTER':
                     return 'home.html' # CHANGE BASED ON IMPLEMENTATION
                 else:
