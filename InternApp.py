@@ -91,7 +91,7 @@ def authenticate_user(username, password):
     try:
         # Connection is db_conn !!!
         
-        cursor = conn.cursor()
+        cursor = db_conn.cursor()
         cursor.execute("SELECT user_pass, upper(user_role) FROM users WHERE user_id = %s", (username,))
         user_data = cursor.fetchone()
         
