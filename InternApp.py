@@ -1,7 +1,7 @@
 # from curses import flash
 # from flask_wtf.csrf import CSRFProtect, CSRFError
 from io import BytesIO
-from flask import Flask, render_template, session, request, redirect, flash, jsonify
+from flask import Flask, render_template, session, request, redirect, flash, jsonify, url_for
 from pymysql import connections
 import os
 import boto3
@@ -168,7 +168,7 @@ def login_post():
 def logout():
    # remove the username from the session if it is there
    session.pop('username', None)
-   return redirect({{url_for('/')}})
+   return redirect(url_for('/'))
 
 # @app.route("/displayStudInfo", methods=['GET', 'POST'])
 # def viewStudentInfo():
