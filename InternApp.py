@@ -167,12 +167,12 @@ def displayStudentResume(stud_id):
     statement = "SELECT stud_id, stud_resume FROM student s WHERE stud_id = %s"
     cursor = db_conn.cursor()
     cursor.execute(statement, (stud_id,))
-    result = cursor.fetchone()
+    results = cursor.fetchone()
     
-    if result: 
-        studID, resume = result
+    if results: 
+        studID, resume = results
         resume = "https://" + bucket + ".s3.amazonaws.com/stud_id-" + studID + "_pdf.pdf"
-        return render_template('display_resume.html', result=result, resume=resume)
+        return render_template('display_resume.html', results=results, resume=resume)
         
     else: 
         return "Invalid student."
