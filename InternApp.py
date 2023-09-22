@@ -164,15 +164,32 @@ def login_post():
     
 
 
+# @app.route("/displayStudInfo", methods=['GET', 'POST'])
+# def viewStudentInfo():
+#     statement = "SELECT s.* FROM student s JOIN company c ON s.com_id = c.com_id WHERE s.com_id = 'C0001';"
+#     cursor = db_conn.cursor()
+#     cursor.execute(statement)
+#     result = cursor.fetchall()
+#     cursor.close()
+    
+#     return render_template('display_studInfo.html', data=result)
+
 @app.route("/displayStudInfo", methods=['GET', 'POST'])
 def viewStudentInfo():
-    statement = "SELECT s.* FROM student s JOIN company c ON s.com_id = c.com_id WHERE s.com_id = 'C0001';"
-    cursor = db_conn.cursor()
-    cursor.execute(statement)
-    result = cursor.fetchall()
-    cursor.close()
+    username = session.get('username')
+
+    if username:
+        statement = "SELECT s.* FROM student s JOIN company c ON s.com_id = c.com_id WHERE s.com_id = %s;"
     
-    return render_template('display_studInfo.html', data=result)
+        cursor = db_conn.cursor()
+        cursor.execute(statement)
+        result = cursor.fetchall()
+        cursor.close()
+    
+        return render_template('display_studInfo.html', data=result)
+    
+    else:
+        return "Nothing found"
 
 @app.route('/displayStudInfoDetails/<stud_id>')
 def viewStudentInfoDetails(stud_id):
