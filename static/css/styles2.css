@@ -156,6 +156,7 @@ img{
   text-align: center;
   border-radius: .5rem;
   transition: .3s;
+  width: 100%;
 }
 
 .login__button:hover{
