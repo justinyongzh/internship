@@ -10,7 +10,7 @@
         <!-- ===== BOX ICONS ===== -->
         <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
 
-        <title>Responsive Login Form Sign In Sign Up</title>
+        <title>Sign In</title>
     </head>
     <body>
         <div class="login">
@@ -20,27 +20,23 @@
                 </div>
 
                 <div class="login__forms">
-                    <form action="" class="login__registre">
+                    <form method="POST" action="/login" class="login__registre">
                         <h1 class="login__title">Sign In</h1>
     
                         <div class="login__box">
                             <i class='bx bx-user login__icon'></i>
-                            <input type="text" placeholder="Username" class="login__input" id="login_username">
+                            <input type="text" placeholder="Username" class="login__input" name="username" required>
                         </div>
     
                         <div class="login__box">
                             <i class='bx bx-lock-alt login__icon'></i>
-                            <input type="password" placeholder="Password" class="login__input" id="login_password">
+                            <input type="password" placeholder="Password" class="login__input" name="password" required>
                         </div>
 
-                        <a href="{{url_for('homepage')}}" class="login__button">Sign In</a>
-
+                        <input type="submit" class="login__button" value="Login">
                     </form>
                 </div>
             </div>
         </div>
-
-        <!--===== MAIN JS =====-->
-        <script src="../static/js/main2.js"></script>
     </body>
 </html>
