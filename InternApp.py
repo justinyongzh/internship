@@ -37,6 +37,10 @@ def index():
 def homepage():
     return render_template('home.html')
 
+@app.route("/searchStudentPage", methods=['GET', 'POST'])
+def searchStudentPage():
+    return render_template('search_student.html')
+
 @app.route("/aboutpage", methods=['GET', 'POST'])
 def aboutpage():
     return render_template('about.html')
