@@ -109,6 +109,8 @@ def authenticate_user(username, password):
                     return 'student.html' # CHANGE BASED ON IMPLEMENTATION
                 elif user_role == 'COMPANY':
                     return 'company.html' # CHANGE BASED ON IMPLEMENTATION
+                elif user_role == 'MASTER':
+                    return 'home.html' # CHANGE BASED ON IMPLEMENTATION
                 else:
                     return None  # Invalid user_role, access denied
         
