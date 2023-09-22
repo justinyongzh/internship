@@ -8263,3 +8263,68 @@ h1, h2, h3, h4, h5,
   .returnComp_button:hover{
     background-color: var(--first-color-dark);
   }
+
+  .single-input{
+    display:block;
+    width:100%;
+    line-height:40px;
+    border:none;
+    outline:none;
+    background:#f9f9ff;
+    padding:0 20px;
+    margin-bottom: 20px;
+}
+
+.single-input:focus{
+    outline:none
+}
+
+.button-group-area .genric-btn{
+    margin-right:10px;
+    margin-top:10px
+}
+
+.genric-btn{
+    display:inline-block;
+    outline:none;
+    line-height:40px;
+    padding:0 30px;
+    font-size:.8em;
+    text-align:center;
+    text-decoration:none;
+    font-weight:500;
+    cursor:pointer;
+    -webkit-transition:all 0.3s ease 0s;
+    -moz-transition:all 0.3s ease 0s;
+    -o-transition:all 0.3s ease 0s;
+    transition:all 0.3s ease 0s
+}
+
+.genric-btn:focus{
+    outline:none
+}
+
+.genric-btn.arrow{
+    display:-webkit-inline-box;
+    display:-ms-inline-flexbox;
+    display:inline-flex;
+    -webkit-box-align:center;
+    -ms-flex-align:center;
+    align-items:center
+}
+
+.genric-btn.success{
+    color:#fff;
+    background:#0770f9;
+    border:1px solid transparent
+}
+
+.genric-btn.success:hover{
+    color:#0770f9;
+    border:1px solid #0770f9;
+    background:#fff
+}
+
+.genric-btn.circle{
+    border-radius:20px
+}
