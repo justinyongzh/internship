@@ -177,17 +177,17 @@ def login_post():
 #     return render_template('display_studInfo.html', data=result)
 
 @app.route("/displayStudInfo", methods=['GET', 'POST'])
-def viewStudentInfo():
+def viewStudentInfo(username):
     username = session.get('username')
 
     if username:
         statement = "SELECT s.* FROM student s JOIN company c ON s.com_id = c.com_id WHERE s.com_id = %s;"
-    
+
         cursor = db_conn.cursor()
         cursor.execute(statement, (username,))
         result = cursor.fetchall()
         cursor.close()
-    
+
         return render_template('display_studInfo.html', data=result)
     
     else:
