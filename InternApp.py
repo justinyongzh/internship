@@ -122,8 +122,8 @@ def authenticate_user(username, password):
     
     finally:
         # Close the database connection
-        if conn:
-            conn.close()
+        if db_conn:
+            db_conn.close()
 
 
 @app.route('/login', methods=['POST'])
