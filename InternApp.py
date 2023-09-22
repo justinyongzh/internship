@@ -164,7 +164,11 @@ def login_post():
     else:
         return "Access denied"
     
-
+@app.route('/logout')
+def logout():
+   # remove the username from the session if it is there
+   session.pop('username', None)
+   return redirect({{url_for('/')}})
 
 # @app.route("/displayStudInfo", methods=['GET', 'POST'])
 # def viewStudentInfo():
