@@ -181,6 +181,8 @@ def displayStudentResume(stud_id):
     except Exception as e:
         print("Database error:", str(e))
         return None  # Access denied in case of an error
+    
+    return render_template('display_studInfoDetails.html')
 
 # @app.route("/", methods=['GET', 'POST'])
 # def home():
