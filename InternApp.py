@@ -1,7 +1,7 @@
 # from curses import flash
 # from flask_wtf.csrf import CSRFProtect, CSRFError
 from io import BytesIO
-from flask import Flask, render_template, request, redirect, flash, jsonify
+from flask import Flask, render_template, session, request, redirect, flash, jsonify
 from pymysql import connections
 import os
 import boto3
@@ -157,6 +157,9 @@ def login_post():
     redirect_page = authenticate_user(username, password)
     
     if redirect_page:
+        # Store the username in the Flask session
+        session['username'] = username
+        
         # Redirect to the appropriate page based on user role
         return render_template(redirect_page)
     else:
