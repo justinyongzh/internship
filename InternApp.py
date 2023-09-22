@@ -168,7 +168,7 @@ def login_post():
 def logout():
    # remove the username from the session if it is there
    session.pop('username', None)
-   return redirect(url_for('/'))
+   return redirect(url_for('index'))
 
 # @app.route("/displayStudInfo", methods=['GET', 'POST'])
 # def viewStudentInfo():
