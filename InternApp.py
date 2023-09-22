@@ -87,6 +87,59 @@ def testimonialpage():
 #     return render_template('student_info.html', rows=rows)
 
 
+def authenticate_user(username, password):
+    try:
+        # Connection is db_conn !!!
+        
+        cursor = conn.cursor()
+        cursor.execute("SELECT user_pass, upper(user_role) FROM users WHERE user_id = %s", (username,))
+        user_data = cursor.fetchone()
+        
+        if user_data:
+            db_pass, user_role = user_data
+            
+            # Check if password correct
+            if password == db_pass:
+                # Redirect users based on their roles
+                if user_role == 'ADMIN':
+                    return 'admin.html' # CHANGE BASED ON IMPLEMENTATION
+                elif user_role == 'LECTURER':
+                    return 'lecturer.html' # CHANGE BASED ON IMPLEMENTATION
+                elif user_role == 'STUDENT':
+                    return 'student.html' # CHANGE BASED ON IMPLEMENTATION
+                elif user_role == 'COMPANY':
+                    return 'company.html' # CHANGE BASED ON IMPLEMENTATION
+                else:
+                    return None  # Invalid user_role, access denied
+        
+        return None  # User not found or passwords don't match, access denied
+    
+    except Exception as e:
+        print("Database error:", str(e))
+        return None  # Access denied in case of an error
+    
+    finally:
+        # Close the database connection
+        if conn:
+            conn.close()
+
+
+@app.route('/login', methods=['POST'])
+def login_post():
+    username = request.form['username'] #From index.html
+    password = request.form['password'] #From index.html
+    
+    # Use your authenticate_user function here
+    redirect_page = authenticate_user(username, password)
+    
+    if redirect_page:
+        # Redirect to the appropriate page based on user role
+        return render_template(redirect_page)
+    else:
+        return "Access denied"
+    
+
+
 @app.route("/displayStudInfo", methods=['GET', 'POST'])
 def viewStudentInfo():
     statement = "SELECT s.* FROM student s JOIN company c ON s.com_id = c.com_id WHERE s.com_id = 'C0001';"
@@ -202,6 +255,7 @@ def displayStudentResume(stud_id):
 
 #     print("all modification done...")
 #     return render_template('AddEmpOutput.html', name=emp_name)
+    
 
 
 @app.route("/lecturerDisplayStudInfo", methods=['GET', 'POST'])
