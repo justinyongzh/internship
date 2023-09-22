@@ -177,7 +177,7 @@ def displayStudentResume(stud_id):
     else: 
         return "Invalid student."
         
-    return render_template('display_studInfoDetails.html')
+    return render_template('display_studInfo.html')
 
 # @app.route("/", methods=['GET', 'POST'])
 # def home():
