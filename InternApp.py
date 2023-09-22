@@ -164,24 +164,19 @@ def viewStudentInfoDetails(stud_id):
 
 @app.route('/displayStudResume/<stud_id>')
 def displayStudentResume(stud_id):
-    try:
-        statement = "SELECT stud_id, stud_resume FROM student s WHERE stud_id = %s"
-        cursor = db_conn.cursor()
-        cursor.execute(statement, (stud_id,))
-        result = cursor.fetchone()
+    statement = "SELECT stud_id, stud_resume FROM student s WHERE stud_id = %s"
+    cursor = db_conn.cursor()
+    cursor.execute(statement, (stud_id,))
+    result = cursor.fetchone()
     
-        if result: 
-            studID, resume = result
-            resume = "https://" + bucket + ".s3.amazonaws.com/stud_id-" + studID + "_pdf.pdf"
-            return render_template('display_resume.html', result=result, resume=resume)
+    if result: 
+        studID, resume = result
+        resume = "https://" + bucket + ".s3.amazonaws.com/stud_id-" + studID + "_pdf.pdf"
+        return render_template('display_resume.html', result=result, resume=resume)
         
-        else: 
-            return "Invalid student."
+    else: 
+        return "Invalid student."
         
-    except Exception as e:
-        print("Database error:", str(e))
-        return None  # Access denied in case of an error
-    
     return render_template('display_studInfoDetails.html')
 
 # @app.route("/", methods=['GET', 'POST'])
