@@ -87,6 +87,24 @@ def testimonialpage():
 #     return render_template('student_info.html', rows=rows)
 
 
+@app.route("/searchStudentProcess", methods=['GET', 'POST'])
+def searchStudProcess():
+    stud_id = request.form['stud_id']
+
+    search_sql = "SELECT * FROM student WHERE stud_id = %s"
+    cursor = db_conn.cursor()
+
+    cursor.execute(search_sql, (stud_id))
+    rows = cursor.fetchone()
+
+    if rows:
+        return render_template('display_searchStudInfo.html', rows=rows)
+    else:
+        return "Student does not exist."
+
+    cursor.close()
+
+
 def authenticate_user(username, password):
     try:
         # Connection is db_conn !!!
