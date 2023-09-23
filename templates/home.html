@@ -86,14 +86,7 @@
                     </div>
                     <a href="contact.html" class="nav-item nav-link">Contact</a>
                 </div>
-<!--                 <a href="/logout" class="btn btn-primary py-2 px-4 d-none d-lg-block">Log out</a> -->
-                    {% if user_logged_in %}
-                       <a href="/" class="btn btn-primary py-2 px-4 d-none d-lg-block">Log out</a>
-                    {% else %}
-                       <a href="{{ url_for('index') }}" class="btn btn-primary py-2 px-4 d-none d-lg-block">Login</a>
-                       <a href="{{ url_for('index') }}" class="btn btn-primary py-2 px-4 d-none d-lg-block">Signup</a>
-{% endif %}
-
+                   <a href="/logout" class="btn btn-primary py-2 px-4 d-none d-lg-block">Log out</a>
             </div>
         </nav>
     </div>
