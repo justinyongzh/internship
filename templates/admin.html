@@ -91,50 +91,7 @@
         </nav>
     </div>
     <!-- Navbar End -->
-
-
-    <!-- Header Start -->
-    <!-- <div class="jumbotron jumbotron-fluid page-header position-relative overlay-bottom" style="margin-bottom: 90px;">
-        <div class="container text-center py-5">
-            <h1 class="text-white display-1">Student Detail</h1>
-            <div class="d-inline-flex text-white mb-5">
-                <p class="m-0 text-uppercase"><a class="text-white" href="">Home</a></p>
-                <i class="fa fa-angle-double-right pt-1 px-3"></i>
-                <p class="m-0 text-uppercase">Student Detail</p>
-            </div>
-            <div class="mx-auto mb-5" style="width: 100%; max-width: 600px;">
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <button class="btn btn-outline-light bg-white text-body px-4 dropdown-toggle" type="button" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">Students</button>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Courses 1</a>
-                            <a class="dropdown-item" href="#">Courses 2</a>
-                            <a class="dropdown-item" href="#">Courses 3</a>
-                        </div>
-                    </div>
-                    <input type="text" class="form-control border-light" style="padding: 30px 25px;" placeholder="Please enter Student ID">
-                    <div class="input-group-append">
-                        <button class="btn btn-secondary px-4 px-lg-5">Search</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
-    <!-- Header End -->
-
-
-    <!-- Detail Start -->
-        <!-- <div class="container py-5">
-            <div class="row">
-                <div class="col-lg-8">
-                    <div class="mb-5">
-                        
-	                    
-                    </div>
-               </div>
-            </div>
-        </div> -->
+	
         <div class="row">
             <div class="col-md-12">
                 <div class="table-wrap">
@@ -161,16 +118,21 @@
         				<td>{{ row[3] }}</td>
         				<td>{{ row[4] }}</td>
         				<td>
-            				   <div class="button-group-area mt-10">
-                                              <a href="/update_company_status/{{ row[0] }}"
-                                                 class="genric-btn success circle arrow">Approve</a>
-                                              <a href="/delete_company{{ row[0] }}" 
-				                 class="genric-btn success circle arrow">Reject</a>
-                                           </div>
+            					<div class="button-group-area mt-10">
+                					<form action="/update_company_status/{{ row[4] }}" method="POST">
+        						<input type="hidden" name="com_email" value="{{ row[4] }}">
+        						<button type="submit" class="genric-btn success circle arrow">Approve</button>
+    							</form>
+
+							<form action="/delete_company/{{ row[4] }}" method="POST">
+        						<input type="hidden" name="com_email" value="{{ row[4] }}">
+        						<button type="submit" class="genric-btn success circle arrow">Reject</button>
+    							</form>
+							
+            					</div>
         				</td>                                    
     				</tr>
 			{% endfor %}
-
                     </tbody>
                   </table>
                 </div>
