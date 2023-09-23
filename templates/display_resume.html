@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Edukate - Online Education Website Template</title>
+    <title>InternU - An Insightful Internship Website</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
@@ -65,29 +65,29 @@
     <!-- Navbar Start -->
     <div class="container-fluid p-0">
         <nav class="navbar navbar-expand-lg bg-white navbar-light py-3 py-lg-0 px-lg-5">
-            <a href="home.html" class="navbar-brand ml-lg-3">
-                <h1 class="m-0 text-uppercase text-primary"><i class="fa fa-book-reader mr-3"></i>Edukate</h1>
+            <a href="{{url_for('homepage')}}" class="navbar-brand ml-lg-3">
+                <h1 class="m-0 text-uppercase text-primary"><i class="fa fa-book-reader mr-3"></i>InternU</h1>
             </a>
             <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-between px-lg-3" id="navbarCollapse">
                 <div class="navbar-nav mx-auto py-0">
-                    <a href="home.html" class="nav-item nav-link">Home</a>
-                    <a href="about.html" class="nav-item nav-link">About</a>
-                    <a href="course.html" class="nav-item nav-link">Courses</a>
+                    <a href="{{url_for('homepage')}}" class="nav-item nav-link">Home</a>
+                    <a href="{{url_for('aboutpage')}}" class="nav-item nav-link">About</a>
+                    <a href="{{url_for('coursepage')}}" class="nav-item nav-link">Courses</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle active" data-toggle="dropdown">Pages</a>
                         <div class="dropdown-menu m-0">
                             <a href="detail.html" class="dropdown-item active">Course Detail</a>
-                            <a href="feature.html" class="dropdown-item">Our Features</a>
-                            <a href="team.html" class="dropdown-item">Instructors</a>
-                            <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+                            <a href="{{url_for('featurepage')}}" class="dropdown-item">Our Features</a>
+                            <a href="{{url_for('teampage')}}" class="dropdown-item">Instructors</a>
+                            <a href="{{url_for('testimonialpage')}}" class="dropdown-item">Testimonial</a>
                         </div>
                     </div>
-                    <a href="contact.html" class="nav-item nav-link">Contact</a>
+                    <a href="{{url_for('contactpage')}}" class="nav-item nav-link">Contact</a>
                 </div>
-                <a href="" class="btn btn-primary py-2 px-4 d-none d-lg-block">Join Us</a>
+                <a href="/logout" class="btn btn-primary py-2 px-4 d-none d-lg-block">Log out</a>
             </div>
         </nav>
     </div>
@@ -96,7 +96,7 @@
 
     <!-- Detail Start -->
     <a href="#" class="returnComp_button btn" id="returnComp-id">CLICK HERE to go back</a>
-	<div class="jumbotron jumbotron-fluid page-header position-relative overlay-bottom" style="margin-bottom: 90px;">
+	<div class="jumbotron jumbotron-fluid page-header position-relative" style="margin-bottom: 90px;">
         <div class="container text-center py-5">
             <h1 class="text-white display-1">Student Resume</h1>
 		</div>
@@ -126,12 +126,12 @@
 
 
     <!-- Footer Start -->
-    <div class="container-fluid position-relative overlay-top bg-dark text-white-50 py-5" style="margin-top: 90px;">
+    <div class="container-fluid position-relative bg-dark text-white-50 py-5" style="margin-top: 90px;">
         <div class="container mt-5 pt-5">
             <div class="row">
                 <div class="col-md-6 mb-5">
-                    <a href="home.html" class="navbar-brand">
-                        <h1 class="mt-n2 text-uppercase text-white"><i class="fa fa-book-reader mr-3"></i>Edukate</h1>
+                    <a href="{{url_for('homepage')}}" class="navbar-brand">
+                        <h1 class="mt-n2 text-uppercase text-white"><i class="fa fa-book-reader mr-3"></i>InternU</h1>
                     </a>
                     <p class="m-0">Accusam nonumy clita sed rebum kasd eirmod elitr. Ipsum ea lorem at et diam est, tempor rebum ipsum sit ea tempor stet et consetetur dolores. Justo stet diam ipsum lorem vero clita diam</p>
                 </div>
@@ -187,7 +187,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6 text-center text-md-left mb-3 mb-md-0">
-                    <p class="m-0">Copyright &copy; <a class="text-white" href="#">Your Site Name</a>. All Rights Reserved.
+                    <p class="m-0">Copyright &copy; <a class="text-white" href="#">InternU</a>. All Rights Reserved.
                     </p>
                 </div>
                 <div class="col-md-6 text-center text-md-right">
@@ -214,10 +214,9 @@
 
     <!-- Template Javascript -->
     <script src="../static/js/main.js"></script>
-    <script src="../static/js/jquery.min.js"></script>
+    <!-- <script src="../static/js/jquery.min.js"></script>
     <script src="../static/js/popper.js"></script>
-    <script src="../static/js/bootstrap.min.js"></script>
-    <script src="../static/js/main3.js"></script>
+    <script src="../static/js/bootstrap.min.js"></script> -->
 </body>
 
 </html>
