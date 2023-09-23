@@ -138,39 +138,39 @@
             <div class="row">
                 <div class="col-md-6 mt-md-0 mt-3">
                     <label>Student Name</label>
-                    <input type="text" name="stud_name" value="{{ stud_name }}" class="form-control" required>
+                    <input type="text" name="stud_name" value="{{ student[1] }}" class="form-control" required>
                 </div>
                 <div class="col-md-6 mt-md-0 mt-3">
                     <label>Programme</label>
-                    <input type="text" name="stud_programme" value="{{ stud_programme }}" placeholder="FOCS" class="form-control" required>
+                    <input type="text" name="stud_programme" value="{{ student[8] }}" placeholder="FOCS" class="form-control" required>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-md-6 mt-md-0 mt-3">
                     <label>Email</label>
-                    <input type="text" name="stud_mail" value="{{ stud_mail }}" class="form-control" required>
+                    <input type="text" name="stud_mail" value="{{ student[4] }}" class="form-control" required>
                 </div>
                 <div class="col-md-6 mt-md-0 mt-3">
                     <label>Phone No</label>
-                    <input type="text" name="stud_HP" value="{{ stud_HP }}" class="form-control" required>
+                    <input type="text" name="stud_HP" value="{{ student[5] }}" class="form-control" required>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-md-6 mt-md-0 mt-3">
                     <label>NRIC No</label>
-                    <input type="text" name="stud_ic" value="{{ stud_ic }}" class="form-control" required>
+                    <input type="text" name="stud_ic" value="{{ student[3] }}" class="form-control" required>
                 </div>
                 <div class="col-md-6 mt-md-0 mt-3">
                     <label>Gender</label>
                     <div class="d-flex align-items-center mt-2" name="stud_gender">
                         <label class="option">
-                            <input type="radio" name="stud_gender" value="M" {% if stud_gender == 'M' %}checked{% endif %}>Male
+                            <input type="radio" name="stud_gender" value="M" {% if student[2] == 'M' %}checked{% endif %}>Male
                             <span class="checkmark"></span>
                         </label>
                         <label class="option ms-4 ml-lg-3">
-                            <input type="radio" name="stud_gender" value="F" {% if stud_gender == 'F' %}checked{% endif %}>Female
+                            <input type="radio" name="stud_gender" value="F" {% if student[2] == 'F' %}checked{% endif %}>Female
                             <span class="checkmark"></span>
                         </label>                        
                     </div>
@@ -180,24 +180,24 @@
             <div class="row">
                 <div class="col-md-6 mt-md-0 mt-3">
                     <label>Current Address</label>
-                    <input type="text" name="stud_currAddress" value="{{ stud_currAddress }}" class="form-control" required>
+                    <input type="text" name="stud_currAddress" value="{{ student[6] }}" class="form-control" required>
                 </div>
                 <div class="col-md-6 mt-md-0 mt-3">
                     <label>Home Address</label>
-                    <input type="text" name="stud_homeAddress" value="{{ stud_homeAddress }}" class="form-control" required>
+                    <input type="text" name="stud_homeAddress" value="{{ student[7] }}" class="form-control" required>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-md-6 mt-md-0 mt-3">
                     <label>CGPA</label>
-                    <input type="text" name="stud_cgpa" value="{{ stud_cgpa }}" class="form-control" required>
+                    <input type="text" name="stud_cgpa" value="{{ student[11] }}" class="form-control" required>
                 </div>
             </div>
 
             <div class="mb-2 mt-2">
                 <h5 for="fileupload">Upload resume </h5>
-                <input id="stud_image_file" name="stud_image_file" type="file">
+                <input id="stud_resume" name="stud_resume" type="file">
             </div>
             
             <div class="btn btn-primary mt-3">Submit</div>
