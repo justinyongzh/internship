@@ -87,9 +87,9 @@
                     <a href="contact.html" class="nav-item nav-link">Contact</a>
                 </div>
 <!--                 <a href="/logout" class="btn btn-primary py-2 px-4 d-none d-lg-block">Log out</a> -->
-                <a href="/login" class="btn btn-primary py-2 px-4 d-none d-lg-block {% if user_logged_in %}d-none{% endif %}">Login</a>
-                <a href="/signup" class="btn btn-primary py-2 px-4 d-none d-lg-block {% if user_logged_in %}d-none{% endif %}">Signup</a>
-                <a href="/logout" class="btn btn-primary py-2 px-4 d-none d-lg-block {% if not user_logged_in %}d-none{% endif %}">Log out</a>
+                <<a href="{{url_for('index')}}" class="btn btn-primary py-2 px-4 d-none d-lg-block {% if user_logged_in %}d-none{% endif %}">Login</a>
+                <a href="{{url_for('index')}}" class="btn btn-primary py-2 px-4 d-none d-lg-block {% if user_logged_in %}d-none{% endif %}">Signup</a>
+                <a href="{{url_for('homepage')}}" class="btn btn-primary py-2 px-4 d-none d-lg-block {% if not user_logged_in %}d-none{% endif %}">Log out</a>
 
             </div>
         </nav>
