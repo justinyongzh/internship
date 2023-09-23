@@ -313,8 +313,8 @@ def GetStudInfo():
             # return render_template('studProfile.html', stud_id=stud_id, stud_name=stud_name, stud_gender=stud_gender,
             #                        stud_IC=stud_IC, stud_email=stud_email, stud_HP=stud_HP, stud_address=stud_address,
             #                        stud_programme=stud_programme, resume_link=resume_link)
-
-    return "Student not found"
+    else:
+        return "Student not found"
 
 @app.route("/preview/<stud_id>")
 def preview_file(stud_id):
