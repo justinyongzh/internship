@@ -296,7 +296,7 @@ def lecturerViewStudentInfo():
     return render_template('lec_displayStudInfo.html', data=result)
 
 
-@app.route("/studProfile/", methods=['GET', 'POST'])
+@app.route("/studProfile", methods=['GET', 'POST'])
 def GetStudInfo():
     username = session.get('username')
 
@@ -305,7 +305,7 @@ def GetStudInfo():
         statement = "SELECT * FROM student WHERE stud_id = %s"
         cursor = db_conn.cursor()
         cursor.execute(statement, (username,))
-        student_data = cursor.fetchall()
+        student_data = cursor.fetchone()
         cursor.close()
         
         return render_template('studProfile.html', student=student_data)
