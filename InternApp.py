@@ -303,7 +303,7 @@ def GetStudInfo():
     if username:
         # Fetch student information from the database
         cursor = db_conn.cursor()
-        cursor.execute(f"SELECT * FROM Student WHERE stud_id = %s")
+        cursor.execute("SELECT * FROM student WHERE stud_id = %s")
         student_data = cursor.fetchall()
         cursor.close()
     
