@@ -28,11 +28,11 @@ db_conn = connections.Connection(
 output = {}
 table = 'Student'
 
-@app.route("/index")
+@app.route("/")
 def index():
     return render_template('index.html')
 
-@app.route("/", methods=['GET', 'POST'])
+@app.route("/homepage", methods=['GET', 'POST'])
 def homepage():
     return render_template('home.html')
 
