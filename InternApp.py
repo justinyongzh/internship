@@ -68,6 +68,10 @@ def teampage():
 def testimonialpage():
     return render_template('testimonial.html')
 
+@app.route("/adminViewCompanyPage", methods=['GET', 'POST'])
+def adminViewCompanyPage():
+    return render_template('admin.html')
+
 @app.route("/ziyuPortfolio", methods=['GET', 'POST'])
 def ziyuPortfolio():
     return render_template('ziyu_portfolio.html')
