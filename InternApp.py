@@ -297,21 +297,19 @@ def preview_file(stud_id):
 
 @app.route("/displayComInfo", methods=['GET', 'POST'])
 def viewCompanyInfo():
-    statement = "SELECT * FROM company WHERE status = 0;"
+    statement = "SELECT com_id,com_name,com_address,com_hp,com_email FROM company WHERE status = 0;"
     cursor = db_conn.cursor()
     cursor.execute(statement)
     result = cursor.fetchall()
     cursor.close()
-    
     return render_template('admin.html', data=result)
 
-
-@app.route('/delete_company/<com_id>', methods=['POST'])
-def delete_company(com_id):
-    # company_id = request.form.get('company_id')
-    statement = "DELETE FROM company WHERE com_id = %s;"
+@app.route('/delete_company/<com_email>', methods=['POST'])
+def delete_company(com_email):
+    company_email = request.form.get('com_email')
+    statement = "DELETE FROM company WHERE com_email = %s;"
     cursor = db_conn.cursor()
-    cursor.execute(statement, (com_id,))
+    cursor.execute(statement, (com_email,))
     db_conn.commit()
 
     # Fetch the updated data from the database
@@ -321,15 +319,15 @@ def delete_company(com_id):
     cursor.close()
 
     # Return the updated data as JSON
-    return jsonify(data=updated_data)
+    return redirect(url_for('viewCompanyInfo'))
 
-@app.route('/update_company_status/<com_id>', methods=['POST'])
-def update_company_status(com_id):
-    try:
-        # company_id = request.form.get('company_id')
-        statement = "UPDATE company SET status = 1 WHERE com_id = %s;"
+@app.route('/update_company_status/<com_email>', methods=['POST'])
+def update_company_status(com_email):
+
+        com_email = request.form.get('com_email')
+        statement = "UPDATE company SET status = 1 WHERE com_email = %s;"
         cursor = db_conn.cursor()
-        cursor.execute(statement, (com_id,))
+        cursor.execute(statement, (com_email,))
         db_conn.commit()
 
         # Fetch the updated data from the database
@@ -337,14 +335,7 @@ def update_company_status(com_id):
         cursor.execute(statement)
         updated_data = cursor.fetchall()
         cursor.close()
-
-        # Return the updated data as JSON
-        return jsonify(data=updated_data)
-
-    except Exception as e:
-        # Handle exceptions here, log the error for debugging
-        print("Error in update_company_status:", str(e))
-        return jsonify(error="An error occurred while updating company status.")
+        return redirect(url_for('viewCompanyInfo'))
 
 # Function to fetch student data for editing
 def get_student_data(stud_id):
