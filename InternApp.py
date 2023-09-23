@@ -346,6 +346,57 @@ def update_company_status(com_id):
         print("Error in update_company_status:", str(e))
         return jsonify(error="An error occurred while updating company status.")
 
+# Function to fetch student data for editing
+def get_student_data(stud_id):
+    cursor = db_conn.cursor()
+    cursor.execute(f"SELECT stud_name, stud_gender, stud_IC, stud_email, stud_HP, stud_address, stud_programme FROM Student WHERE stud_id = {stud_id}")
+    student_data = cursor.fetchone()
+    cursor.close()
+    return student_data
+
+
+# Route to edit student profile
+@app.route("/editStudProfile/<stud_id>", methods=['GET', 'POST'])
+def EditStudProfile(stud_id):
+    username =  session.get('username')
+
+    if username:
+        if request.method == 'GET':
+            student_data = get_student_data(stud_id)
+
+            if student_data:
+                stud_name, stud_gender, stud_IC, stud_email, stud_HP, stud_address, stud_programme = student_data
+
+                return render_template('editStudProfile.html', stud_id=stud_id, stud_name=stud_name, stud_gender=stud_gender,
+                                    stud_IC=stud_IC, stud_email=stud_email, stud_HP=stud_HP, stud_address=stud_address,
+                                    stud_programme=stud_programme)
+    
+
+        elif request.method == 'POST':
+            # Retrieve form data
+            stud_name = request.form['stud_name']
+            stud_programme = request.form['stud_program']
+            stud_mail = request.form['stud_mail']
+            stud_phone = request.form['stud_phone']
+            stud_ic = request.form['stud_ic']
+            stud_gender = request.form['stud_gender']
+            stud_currAddress = request.form['stud_currAddress']
+            stud_homeAddress = request.form['stud_homeAddress']
+
+            # Update the database with the new data
+            cursor = db_conn.cursor()
+            cursor.execute(f"UPDATE Student SET stud_name = '{stud_name}', stud_programme = '{stud_programme}', "
+                        f"stud_email = '{stud_mail}', stud_HP = '{stud_phone}', stud_IC = '{stud_ic}', "
+                        f"stud_gender = '{stud_gender}', stud_address = '{stud_currAddress}', "
+                        f"stud_homeAddress = '{stud_homeAddress}' WHERE stud_id = {stud_id}")
+            db_conn.commit()
+            cursor.close()
+
+            flash("Student profile updated successfully", "success")
+            return redirect(url_for('GetStudInfo', stud_id=stud_id))
+    
+    return "Student not found"
+
 
 if __name__ == '__main__':
     app.secret_key = 'cc_key'
