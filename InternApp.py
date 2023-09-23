@@ -296,7 +296,7 @@ def lecturerViewStudentInfo():
     return render_template('lec_displayStudInfo.html', data=result)
 
 
-@app.route("/studProfile", methods=['GET', 'POST'])
+@app.route("/studProfile/", methods=['GET', 'POST'])
 def GetStudInfo():
     username = session.get('username')
 
