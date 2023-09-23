@@ -34,7 +34,16 @@ def index():
 
 @app.route("/homepage", methods=['GET', 'POST'])
 def homepage():
-    return render_template('home.html')
+    user_logged_in = check_if_user_is_logged_in()
+    return render_template('home.html', user_logged_in=user_logged_in)
+
+def check_if_user_is_logged_in():
+    username = session.get('username')
+    
+    if username is not None:
+        return True
+    else:
+        return False
 
 @app.route("/searchStudentPage", methods=['GET', 'POST'])
 def searchStudentPage():
