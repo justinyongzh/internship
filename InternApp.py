@@ -40,7 +40,7 @@ def homepage():
 def check_if_user_is_logged_in():
     username = session.get('username')
     
-    if username is not None:
+    if username is None:
         return True
     else:
         return False
