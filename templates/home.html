@@ -88,10 +88,10 @@
                 </div>
 <!--                 <a href="/logout" class="btn btn-primary py-2 px-4 d-none d-lg-block">Log out</a> -->
                     {% if user_logged_in %}
-                       <a href="{{ url_for('logout') }}" class="btn btn-primary py-2 px-4 d-none d-lg-block">Log out</a>
+                       <a href="{{ url_for('home') }}" class="btn btn-primary py-2 px-4 d-none d-lg-block">Log out</a>
                     {% else %}
-                       <a href="{{ url_for('login') }}" class="btn btn-primary py-2 px-4 d-none d-lg-block">Login</a>
-                       <a href="{{ url_for('signup') }}" class="btn btn-primary py-2 px-4 d-none d-lg-block">Signup</a>
+                       <a href="{{ url_for('index') }}" class="btn btn-primary py-2 px-4 d-none d-lg-block">Login</a>
+                       <a href="{{ url_for('index') }}" class="btn btn-primary py-2 px-4 d-none d-lg-block">Signup</a>
 {% endif %}
 
             </div>
