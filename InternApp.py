@@ -170,6 +170,20 @@ def logout():
    session.pop('username', None)
    return redirect(url_for('index'))
 
+@app.route('/signup', methods=['POST'])
+def signup_post():
+    username = request.form['signUpUsername'] #From index.html
+    password = request.form['signUpPassword'] #From index.html
+    roles    = request.form['roles'] #From index.html
+    
+    insert_sql = "INSERT INTO users VALUES (%s, %s, %s)"
+    cursor = db_conn.cursor()
+    cursor.execute(insert_sql, (username, password, roles))
+    db_conn.commit()
+    cursor.close()
+
+    return render_template('index.html')
+
 # @app.route("/displayStudInfo", methods=['GET', 'POST'])
 # def viewStudentInfo():
 #     statement = "SELECT s.* FROM student s JOIN company c ON s.com_id = c.com_id WHERE s.com_id = 'C0001';"
