@@ -83,7 +83,7 @@
                     <a href="profile.html" class="nav-item nav-link">Profile</a>
                     <a href="about.html" class="nav-item nav-link">About</a>
                     <a href="course.html" class="nav-item nav-link">Courses</a>
-		    <a href="studProfile.html" class="nav-item nav-link">Student Profile</a>
+		            <a href="studProfile.html" class="nav-item nav-link">Student Profile</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
                         <div class="dropdown-menu m-0">
@@ -95,7 +95,7 @@
                     </div>
                     <a href="contact.html" class="nav-item nav-link">Contact</a>
                 </div>
-                <a href="" class="btn btn-primary py-2 px-4 d-none d-lg-block">Join Us</a>
+                <a href="/logout" class="btn btn-primary py-2 px-4 d-none d-lg-block">Log out</a>
             </div>
         </nav>
     </div>
@@ -103,6 +103,21 @@
     
     <!-- Detail Start -->
     <a href="studProfile.html" class="returnComp_button btn" id="returnComp-id">CLICK HERE to go back</a>
+
+    <!--
+    <div class="ScriptTop">
+        <div class="rt-container">
+            <div class="col-rt-4" id="float-right">
+                //Ad here
+            </div>
+            <div class="col-rt-2">
+                <ul>
+                    <li><a href="studProfile.html" title="Back to previous page">Back to Previous</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    -->
 
     <header class="ScriptHeader">
         <div class="rt-container">
@@ -127,7 +142,7 @@
                 </div>
                 <div class="col-md-6 mt-md-0 mt-3">
                     <label>Programme</label>
-                    <input type="text" name="stud_program" value="{{ stud_program }}" placeholder="FOCS" class="form-control" required>
+                    <input type="text" name="stud_programme" value="{{ stud_programme }}" placeholder="FOCS" class="form-control" required>
                 </div>
             </div>
 
@@ -138,7 +153,7 @@
                 </div>
                 <div class="col-md-6 mt-md-0 mt-3">
                     <label>Phone No</label>
-                    <input type="text" name="stud_phone" value="{{ stud_phone }}" class="form-control" required>
+                    <input type="text" name="stud_HP" value="{{ stud_HP }}" class="form-control" required>
                 </div>
             </div>
 
@@ -173,44 +188,10 @@
                 </div>
             </div>
 
-            <div class=" my-md-2 my-3">
-                <label>State*</label>
-                <select id="sub">
-                    <option value="Others">Others</option>
-                    <option value="Johor">Johor</option>
-                    <option value="Kedah">Kedah</option>
-                    <option value="Kelantan">Kelantan</option>
-                    <option value="Melaka">Melaka</option>
-                    <option value="Negeri Sembilan">Negeri Sembilan</option>
-                    <option value="Pahang">Pahang</option>
-                    <option value="Perak">Perak</option>
-                    <option value="Perlis">Perlis</option>
-                    <option value="Pulau Pinang">Pulau Pinang</option>
-                    <option value="Sabah">Sabah</option>
-                    <option value="Sarawak">Sarawak</option>
-                    <option value="Selangor">Selangor</option>
-                    <option value="Terengganu">Terengganu</option>
-                    <option value="Wilayah Persekutuan Kuala Lumpur">Wilayah Persekutuan Kuala Lumpur</option>
-                    <option value="Wilayah Persekutuan Labuan">Wilayah Persekutuan Labuan</option>
-                    <option value="Wilayah Persekutuan Putrajaya">Wilayah Persekutuan Putrajaya</option>
-                </select>
-            </div>
-
             <div class="row">
                 <div class="col-md-6 mt-md-0 mt-3">
                     <label>CGPA</label>
                     <input type="text" name="stud_cgpa" value="{{ stud_cgpa }}" class="form-control" required>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-6 mt-md-0 mt-3">
-                    <label>Lecture ID</label>
-                    <input type="text" name="lec_id" class="form-control" required>
-                </div>
-                <div class="col-md-6 mt-md-0 mt-3">
-                    <label>Company ID</label>
-                    <input type="text" name="com_id" class="form-control" required>
                 </div>
             </div>
 
