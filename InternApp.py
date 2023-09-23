@@ -307,15 +307,8 @@ def GetStudInfo():
         cursor.execute(statement, (username,))
         student_data = cursor.fetchall()
         cursor.close()
-    
-        if student_data:
-            # Extract student information
-            # stud_id, stud_name, stud_gender, stud_IC, stud_email, stud_HP, stud_address, stud_programme, stud_resume = student_data
-    
-            # Create a link to download the resume
-            # resume_link = f"/preview/"
-
-            return render_template('studProfile.html', student=student_data)
+        
+        return render_template('studProfile.html', student=student_data)
     
             # return render_template('studProfile.html', stud_id=stud_id, stud_name=stud_name, stud_gender=stud_gender,
             #                        stud_IC=stud_IC, stud_email=stud_email, stud_HP=stud_HP, stud_address=stud_address,
