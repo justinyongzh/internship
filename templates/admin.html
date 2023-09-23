@@ -161,10 +161,12 @@
         				<td>{{ row[3] }}</td>
         				<td>{{ row[4] }}</td>
         				<td>
-            					<div class="button-group-area mt-10">
-                					<button class="genric-btn success circle arrow approve" data-companyID="{{ row[0] }}">Approve</button>
-                					<button class="genric-btn success circle arrow reject" data-companyID="{{ row[0] }}">Reject</button>
-            					</div>
+            				   <div class="button-group-area mt-10">
+                                              <a href="/update_company_status/{{ row[0] }}"
+                                                 class="genric-btn success circle arrow">Approve</a>
+                                              <a href="/delete_company{{ row[0] }}" 
+				                 class="genric-btn success circle arrow">Reject</a>
+                                           </div>
         				</td>                                    
     				</tr>
 			{% endfor %}
