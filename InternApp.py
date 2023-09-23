@@ -349,7 +349,7 @@ def update_company_status(com_id):
 # Function to fetch student data for editing
 def get_student_data(stud_id):
     cursor = db_conn.cursor()
-    cursor.execute(f"SELECT stud_name, stud_gender, stud_IC, stud_email, stud_HP, stud_address, stud_programme FROM Student WHERE stud_id = {stud_id}")
+    cursor.execute(f"SELECT stud_name, stud_gender, stud_IC, stud_email, stud_HP, stud_address, stud_programme FROM student WHERE stud_id = {stud_id}")
     student_data = cursor.fetchone()
     cursor.close()
     return student_data
