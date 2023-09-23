@@ -362,14 +362,13 @@ def EditStudProfile(stud_id):
 
     if username:
         if request.method == 'GET':
-            student_data = get_student_data(stud_id)
+            statement = "SELECT * FROM student WHERE stud_id = %s;"
+            cursor = db_conn.cursor()
+            cursor.execute(statement, (username,))
+            student_data = cursor.fetchone()
+            cursor.close()
 
-            if student_data:
-                stud_name, stud_gender, stud_IC, stud_email, stud_HP, stud_currAddress, stud_homeAddress, stud_cgpa, stud_programme = student_data
-
-                return render_template('editStudProfile.html', stud_id=stud_id, stud_name=stud_name, stud_gender=stud_gender,
-                                    stud_IC=stud_IC, stud_email=stud_email, stud_HP=stud_HP, stud_currAddress=stud_currAddress,
-                                    stud_homeAddress=stud_homeAddress, stud_cgpa=stud_cgpa, stud_programme=stud_programme)
+            return render_template('editStudProfile.html', student=student_data)
     
 
         elif request.method == 'POST':
@@ -382,6 +381,7 @@ def EditStudProfile(stud_id):
             stud_gender = request.form['stud_gender']
             stud_currAddress = request.form['stud_currAddress']
             stud_homeAddress = request.form['stud_homeAddress']
+            stud_resume = request.files['stud_resume']
 
             # Update the database with the new data
             cursor = db_conn.cursor()
@@ -391,6 +391,37 @@ def EditStudProfile(stud_id):
                         f"stud_homeAddress = '{stud_homeAddress}' WHERE stud_id = {stud_id}")
             db_conn.commit()
             cursor.close()
+
+            # Check if a new resume file is provided
+            if stud_resume.filename != "":
+                s3 = boto3.resource('s3')
+                stud_resume_name_in_s3 = "stud-id-" + str(stud_id) + "_resume.pdf"
+
+                try:
+                    s3.Bucket(custombucket).put_object(Key=stud_resume_name_in_s3, Body=stud_resume, ContentType='application/pdf')
+                    bucket_location = boto3.client('s3').get_bucket_location(Bucket=custombucket)
+                    s3_location = (bucket_location['LocationConstraint'])
+
+                    if s3_location is None:
+                        s3_location = ''
+                    else:
+                        s3_location = '-' + s3_location
+
+                    object_url = "https://s3{0}.amazonaws.com/{1}/{2}".format(
+                        s3_location,
+                        custombucket,
+                        stud_resume_name_in_s3)
+                    
+                    # Update the stud_resume field in the database
+                    cursor = db_conn.cursor()
+                    cursor.execute(f"UPDATE student SET stud_resume = '{object_url}' WHERE stud_id = {stud_id}")
+                    db_conn.commit()
+                    cursor.close()
+
+                except Exception as e:
+                    return str(e)
+
+
 
             flash("Student profile updated successfully", "success")
             return redirect(url_for('GetStudInfo', stud_id=stud_id))
