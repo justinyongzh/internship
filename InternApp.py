@@ -326,7 +326,7 @@ def delete_company():
 def update_company_status():
     try:
         company_id = request.form.get('company_id')
-        statement = "UPDATE company SET status = 0 WHERE com_id = %s;"
+        statement = "UPDATE company SET status = 1 WHERE com_id = %s;"
         cursor = db_conn.cursor()
         cursor.execute(statement, (company_id,))
         db_conn.commit()
