@@ -73,7 +73,7 @@
     <!-- Navbar Start -->
     <div class="container-fluid p-0">
         <nav class="navbar navbar-expand-lg bg-white navbar-light py-3 py-lg-0 px-lg-5">
-            <a href="index.html" class="navbar-brand ml-lg-3">
+            <a href="{{url_for('homepage')}}" class="navbar-brand ml-lg-3">
                 <h1 class="m-0 text-uppercase text-primary"><i class="fa fa-book-reader mr-3"></i>InternU</h1>
             </a>
             <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
@@ -81,21 +81,21 @@
             </button>
             <div class="collapse navbar-collapse justify-content-between px-lg-3" id="navbarCollapse">
                 <div class="navbar-nav mx-auto py-0">
-                    <a href="home.html" class="nav-item nav-link active">Home</a>
+                    <a href="{{url_for('homepage')}}" class="nav-item nav-link active">Home</a>
                     <a href="profile.html" class="nav-item nav-link">Profile</a>
-                    <a href="about.html" class="nav-item nav-link">About</a>
-                    <a href="course.html" class="nav-item nav-link">Courses</a>
+                    <a href="{{url_for('aboutpage')}}" class="nav-item nav-link">About</a>
+                    <a href="{{url_for('coursepage')}}" class="nav-item nav-link">Courses</a>
 		    <a href="studProfile.html" class="nav-item nav-link">Student Profile</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
                         <div class="dropdown-menu m-0">
                             <a href="detail.html" class="dropdown-item">Course Detail</a>
-                            <a href="feature.html" class="dropdown-item">Our Features</a>
-                            <a href="team.html" class="dropdown-item">Instructors</a>
-                            <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+                            <a href="{{url_for('featurepage')}}" class="dropdown-item">Our Features</a>
+                            <a href="{{url_for('teampage')}}" class="dropdown-item">Instructors</a>
+                            <a href="{{url_for('testimonialpage')}}" class="dropdown-item">Testimonial</a>
                         </div>
                     </div>
-                    <a href="contact.html" class="nav-item nav-link">Contact</a>
+                    <a href="{{url_for('contactpage')}}" class="nav-item nav-link">Contact</a>
                 </div>
                 <a href="" class="btn btn-primary py-2 px-4 d-none d-lg-block">Join Us</a>
             </div>
@@ -104,7 +104,7 @@
     <!-- Navbar End -->
     
     <!-- Detail Start -->
-    <a href="home.html" class="returnComp_button btn" id="returnComp-id">CLICK HERE to go back</a>
+    <a href="{{url_for('homepage')}}" class="returnComp_button btn" id="returnComp-id">CLICK HERE to go back</a>
 
 <header class="ScriptHeader">
     <div class="rt-container">
