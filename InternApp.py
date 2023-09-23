@@ -129,7 +129,7 @@ def authenticate_user(username, password):
             if password == db_pass:
                 # Redirect users based on their roles
                 if user_role == 'ADMIN':
-                    return 'admin.html' # CHANGE BASED ON IMPLEMENTATION
+                    return 'admin_home.html' # CHANGE BASED ON IMPLEMENTATION
                 elif user_role == 'LECTURER':
                     return 'lecturer.html' # CHANGE BASED ON IMPLEMENTATION
                 elif user_role == 'STUDENT':
