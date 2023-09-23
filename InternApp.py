@@ -349,7 +349,7 @@ def update_company_status(com_id):
 # Function to fetch student data for editing
 def get_student_data(stud_id):
     cursor = db_conn.cursor()
-    cursor.execute(f"SELECT stud_name, stud_gender, stud_IC, stud_email, stud_HP, stud_address, stud_programme FROM student WHERE stud_id = {stud_id}")
+    cursor.execute(f"SELECT * FROM student WHERE stud_id = {stud_id}")
     student_data = cursor.fetchone()
     cursor.close()
     return student_data
@@ -365,19 +365,19 @@ def EditStudProfile(stud_id):
             student_data = get_student_data(stud_id)
 
             if student_data:
-                stud_name, stud_gender, stud_IC, stud_email, stud_HP, stud_address, stud_programme = student_data
+                stud_name, stud_gender, stud_IC, stud_email, stud_HP, stud_currAddress, stud_homeAddress, stud_cgpa, stud_programme = student_data
 
                 return render_template('editStudProfile.html', stud_id=stud_id, stud_name=stud_name, stud_gender=stud_gender,
-                                    stud_IC=stud_IC, stud_email=stud_email, stud_HP=stud_HP, stud_address=stud_address,
-                                    stud_programme=stud_programme)
+                                    stud_IC=stud_IC, stud_email=stud_email, stud_HP=stud_HP, stud_currAddress=stud_currAddress,
+                                    stud_homeAddress=stud_homeAddress, stud_cgpa=stud_cgpa, stud_programme=stud_programme)
     
 
         elif request.method == 'POST':
             # Retrieve form data
             stud_name = request.form['stud_name']
-            stud_programme = request.form['stud_program']
+            stud_programme = request.form['stud_programme']
             stud_mail = request.form['stud_mail']
-            stud_phone = request.form['stud_phone']
+            stud_HP = request.form['stud_HP']
             stud_ic = request.form['stud_ic']
             stud_gender = request.form['stud_gender']
             stud_currAddress = request.form['stud_currAddress']
@@ -386,8 +386,8 @@ def EditStudProfile(stud_id):
             # Update the database with the new data
             cursor = db_conn.cursor()
             cursor.execute(f"UPDATE Student SET stud_name = '{stud_name}', stud_programme = '{stud_programme}', "
-                        f"stud_email = '{stud_mail}', stud_HP = '{stud_phone}', stud_IC = '{stud_ic}', "
-                        f"stud_gender = '{stud_gender}', stud_address = '{stud_currAddress}', "
+                        f"stud_email = '{stud_mail}', stud_HP = '{stud_HP}', stud_IC = '{stud_ic}', "
+                        f"stud_gender = '{stud_gender}', stud_currAddress = '{stud_currAddress}', "
                         f"stud_homeAddress = '{stud_homeAddress}' WHERE stud_id = {stud_id}")
             db_conn.commit()
             cursor.close()
