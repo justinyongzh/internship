@@ -68,27 +68,29 @@ def teampage():
 def testimonialpage():
     return render_template('testimonial.html')
 
-# @app.route("/studentInfo", methods=['GET', 'POST'])
-# def studentInfo():
-#     return render_template('display_studInfo.html')
+@app.route("/ziyuPortfolio", methods=['GET', 'POST'])
+def ziyuPortfolio():
+    return render_template('ziyu_portfolio.html')
 
-# @app.route("/searchStudent", methods=['GET', 'POST'])
-# def searchEmp():
-#     return render_template('searchStudent.html')
+@app.route("/bingxinPortfolio", methods=['GET', 'POST'])
+def bingxinPortfolio():
+    return render_template('bingxin_portfolio.html')
 
-# @app.route("/searchStudentProcess", methods=['GET', 'POST'])
-# def searchEmpProcess():
-#     stud_id = request.form['stud_id']
+@app.route("/justinPortfolio", methods=['GET', 'POST'])
+def justinPortfolio():
+    return render_template('justin_portfolio.html')
 
-#     search_sql = "SELECT * FROM student WHERE Employee_ID=%s"
-#     cursor = db_conn.cursor()
+@app.route("/junxianPortfolio", methods=['GET', 'POST'])
+def junxianPortfolio():
+    return render_template('junxian_portfolio.html')
 
-#     cursor.execute(search_sql, (stud_id))
-#     rows = cursor.fetchall()
-#     cursor.close()  
+@app.route("/jianyongPortfolio", methods=['GET', 'POST'])
+def jianyongPortfolio():
+    return render_template('jianyong_portfolio.html')
 
-#     return render_template('student_info.html', rows=rows)
-
+@app.route("/xinyiPortfolio", methods=['GET', 'POST'])
+def xinyiPortfolio():
+    return render_template('xinyi_portfolio.html')
 
 @app.route("/searchStudentProcess", methods=['GET', 'POST'])
 def searchStudProcess():
@@ -199,6 +201,7 @@ def viewStudentInfo():
     username = session.get('username')
 
     if username:
+        # statement = "SELECT s.* FROM student s JOIN company c ON s.com_email = c.com_email WHERE s.com_email = %s;"
         statement = "SELECT s.* FROM student s JOIN company c ON s.com_id = c.com_id WHERE s.com_id = %s;"
 
         cursor = db_conn.cursor()
@@ -238,67 +241,6 @@ def displayStudentResume(stud_id):
         
     return render_template('display_studInfo.html')
 
-# @app.route("/", methods=['GET', 'POST'])
-# def home():
-#     return render_template('AddEmp.html')
-
-
-# @app.route("/about", methods=['POST'])
-# def about():
-#     return render_template('www.intellipaat.com')
-
-
-# @app.route("/addemp", methods=['POST'])
-# def AddEmp():
-#     emp_id = request.form['emp_id']
-#     first_name = request.form['first_name']
-#     last_name = request.form['last_name']
-#     pri_skill = request.form['pri_skill']
-#     location = request.form['location']
-#     emp_image_file = request.files['emp_image_file']
-
-#     insert_sql = "INSERT INTO employee VALUES (%s, %s, %s, %s, %s)"
-#     cursor = db_conn.cursor()
-
-#     if emp_image_file.filename == "":
-#         return "Please select a file"
-
-#     try:
-
-#         cursor.execute(insert_sql, (emp_id, first_name, last_name, pri_skill, location))
-#         db_conn.commit()
-#         emp_name = "" + first_name + " " + last_name
-#         # Uplaod image file in S3 #
-#         emp_image_file_name_in_s3 = "emp-id-" + str(emp_id) + "_image_file"
-#         s3 = boto3.resource('s3')
-
-#         try:
-#             print("Data inserted in MySQL RDS... uploading image to S3...")
-#             s3.Bucket(custombucket).put_object(Key=emp_image_file_name_in_s3, Body=emp_image_file)
-#             bucket_location = boto3.client('s3').get_bucket_location(Bucket=custombucket)
-#             s3_location = (bucket_location['LocationConstraint'])
-
-#             if s3_location is None:
-#                 s3_location = ''
-#             else:
-#                 s3_location = '-' + s3_location
-
-#             object_url = "https://s3{0}.amazonaws.com/{1}/{2}".format(
-#                 s3_location,
-#                 custombucket,
-#                 emp_image_file_name_in_s3)
-
-#         except Exception as e:
-#             return str(e)
-
-#     finally:
-#         cursor.close()
-
-#     print("all modification done...")
-#     return render_template('AddEmpOutput.html', name=emp_name)
-    
-
-
 @app.route("/lecturerDisplayStudInfo", methods=['GET', 'POST'])
 def lecturerViewStudentInfo():
     statement = "SELECT s.* FROM student s JOIN lecturer l ON s.lec_id = l.lec_id WHERE s.lec_id = 'L0001';"
@@ -323,10 +265,6 @@ def GetStudInfo():
         cursor.close()
         
         return render_template('studProfile.html', student=student_data)
-    
-            # return render_template('studProfile.html', stud_id=stud_id, stud_name=stud_name, stud_gender=stud_gender,
-            #                        stud_IC=stud_IC, stud_email=stud_email, stud_HP=stud_HP, stud_address=stud_address,
-            #                        stud_programme=stud_programme, resume_link=resume_link)
     else:
         return "Student not found"
 
