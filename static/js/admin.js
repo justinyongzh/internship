@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.approve').forEach(function(button) {
         button.addEventListener('click', function(e) {
             e.preventDefault(); // Prevent the default form submission
-            
+            console.log('Button clicked.');
             // Retrieve the 'company_id' from the data attribute
             var companyID = button.getAttribute('data-companyID');
             console.log('Clicked Approve for Company ID:', companyID);
