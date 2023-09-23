@@ -305,7 +305,7 @@ def GetStudInfo():
         statement = "SELECT * FROM student WHERE stud_id = %s"
         cursor = db_conn.cursor()
         cursor.execute(statement, (username,))
-        student_data = cursor.fetchall()
+        student_data = cursor.fetchone()
         cursor.close()
     
         if student_data:
