@@ -127,7 +127,7 @@ def authenticate_user(username, password):
                 elif user_role == 'LECTURER':
                     return 'lecturer.html' # CHANGE BASED ON IMPLEMENTATION
                 elif user_role == 'STUDENT':
-                    return 'student.html' # CHANGE BASED ON IMPLEMENTATION
+                    return 'home.html' # CHANGE BASED ON IMPLEMENTATION
                 elif user_role == 'COMPANY':
                     return 'home.html' # CHANGE BASED ON IMPLEMENTATION
                 elif user_role == 'MASTER':
