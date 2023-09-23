@@ -323,7 +323,7 @@ def delete_company(com_id):
     # Return the updated data as JSON
     return jsonify(data=updated_data)
 
-@app.route('/update_company_status/<com_id>', methods=['PUT'])
+@app.route('/update_company_status/<com_id>', methods=['POST'])
 def update_company_status(com_id):
     try:
         # company_id = request.form.get('company_id')
