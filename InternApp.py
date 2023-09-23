@@ -296,24 +296,27 @@ def lecturerViewStudentInfo():
     return render_template('lec_displayStudInfo.html', data=result)
 
 
-@app.route("/studProfile/<int:stud_id>", methods=['GET', 'POST'])
-def GetStudInfo(stud_id):
-    # Fetch student information from the database
-    cursor = db_conn.cursor()
-    cursor.execute(f"SELECT * FROM Student WHERE stud_id = {stud_id}")
-    student_data = cursor.fetchone()
-    cursor.close()
+@app.route("/studProfile/", methods=['GET', 'POST'])
+def GetStudInfo():
+    username = session.get('username')
 
-    if student_data:
-        # Extract student information
-        stud_id, stud_name, stud_gender, stud_IC, stud_email, stud_HP, stud_address, stud_programme, stud_resume = student_data
-
-        # Create a link to download the resume
-        resume_link = f"/preview/{stud_id}"
-
-        return render_template('studProfile.html', stud_id=stud_id, stud_name=stud_name, stud_gender=stud_gender,
-                               stud_IC=stud_IC, stud_email=stud_email, stud_HP=stud_HP, stud_address=stud_address,
-                               stud_programme=stud_programme, resume_link=resume_link)
+    if username:
+        # Fetch student information from the database
+        cursor = db_conn.cursor()
+        cursor.execute(f"SELECT * FROM Student WHERE stud_id = %s")
+        student_data = cursor.fetchall()
+        cursor.close()
+    
+        if student_data:
+            # Extract student information
+            stud_id, stud_name, stud_gender, stud_IC, stud_email, stud_HP, stud_address, stud_programme, stud_resume = student_data
+    
+            # Create a link to download the resume
+            resume_link = f"/preview/{stud_id}"
+    
+            return render_template('studProfile.html', stud_id=stud_id, stud_name=stud_name, stud_gender=stud_gender,
+                                   stud_IC=stud_IC, stud_email=stud_email, stud_HP=stud_HP, stud_address=stud_address,
+                                   stud_programme=stud_programme, resume_link=resume_link)
 
     return "Student not found"
 
