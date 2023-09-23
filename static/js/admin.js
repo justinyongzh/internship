@@ -44,6 +44,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Retrieve the 'company_id' from the data attribute
             var companyID = button.getAttribute('data-companyID');
+            console.log('Clicked Approve for Company ID:', companyID);
             
             // Send a POST request to the server to update the company status
             fetch('/update_company_status', {
