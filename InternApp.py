@@ -228,22 +228,34 @@ def displayStudentResume(stud_email):
     return render_template('comp_displayStudInfoDet.html')
 
 # ADDITIONAL FOR LEC_VIEWSTUDENT
-@app.route("/lecturerView", methods=['GET', 'POST'])
-def lecturerViewStudent():
-    username = session.get('username')
+import boto3
+from botocore.exceptions import ClientError
 
-    if username:
-        statement = "SELECT s.* FROM student s JOIN lecturer l ON l.lec_email = s.lec_email WHERE s.lec_email = %s;"
-
-        cursor = db_conn.cursor()
-        cursor.execute(statement, (username,))
-        result = cursor.fetchall()
-        cursor.close()
-
-        return render_template('lec_viewStudent.html', data=result)
+@app.route('/lecturerViewResume/<stud_email>')
+def lecturerViewStudResume(stud_email):
+    # Construct the S3 object key
+    s3_key = f"stud-id-{stud_email}_pdf.pdf"
     
-    else:
-        return "Nothing found"
+    try:
+        # Initialize the S3 client
+        s3 = boto3.client('s3')
+
+        # Specify the S3 bucket name
+        bucket_name = 'diongziyu-bucket'
+
+        # Check if the S3 object exists
+        s3.head_object(Bucket=bucket_name, Key=s3_key)
+
+        # If the object exists, construct and return the URL
+        resume_url = f"https://{bucket_name}.s3.amazonaws.com/{s3_key}"
+        return jsonify({"resume_url": resume_url})
+    except ClientError as e:
+        # Handle the error if the object does not exist
+        if e.response['Error']['Code'] == '404':
+            return jsonify({"resume_url": None})
+        else:
+            # Handle other errors as needed
+            return jsonify({"resume_url": None})
 
 # ADDITIONAL FOR LEC_VIEWSTUDENT
 from urllib.parse import urlparse
