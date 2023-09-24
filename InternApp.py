@@ -260,36 +260,19 @@ def lecturerViewStudResume(stud_email):
     else: 
         return jsonify({"resume_url": None})
 
-
 # ADDITIONAL FOR LEC_VIEWSTUDENT
-from botocore.exceptions import ClientError
-
 @app.route('/lecturerViewReport/<stud_email>')
 def lecturerViewStudReport(stud_email):
-    # Construct the S3 object key for the report URL
-    s3_key = f"stud-id-{stud_email}_rpt.pdf"
+    statement = "SELECT stud_email FROM student s WHERE stud_email = %s"
+    cursor = db_conn.cursor()
+    cursor.execute(statement, (stud_email,))
+    results = cursor.fetchone()
     
-    try:
-        # Initialize the S3 client
-        s3 = boto3.client('s3')
-
-        # Specify the S3 bucket name
-        bucket_name = 'diongziyu-bucket'
-
-        # Check if the S3 object exists
-        s3.head_object(Bucket=bucket_name, Key=s3_key)
-
-        # If the object exists, construct and return the URL
-        report_url = f"https://{bucket_name}.s3.amazonaws.com/{s3_key}"
+    if results: 
+        report_url = "https://" + bucket + ".s3.amazonaws.com/stud-id-" + stud_email + "_rpt.pdf"
         return jsonify({"report_url": report_url})
-    except ClientError as e:
-        # Handle the error if the object does not exist
-        if e.response['Error']['Code'] == '404':
-            return jsonify({"report_url": None})
-        else:
-            # Handle other errors as needed
-            return jsonify({"report_url": None})
-
+    else: 
+        return jsonify({"report_url": None})
 
 @app.route("/studProfile/", methods=['GET', 'POST'])
 def GetStudInfo():
