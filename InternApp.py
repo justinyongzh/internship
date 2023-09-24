@@ -246,19 +246,33 @@ def lecturerViewStudent():
         return "Nothing found"
 
 # ADDITIONAL FOR LEC_VIEWSTUDENT
+from botocore.exceptions import ClientError
+
 @app.route('/lecturerViewResume/<stud_email>')
 def lecturerViewStudResume(stud_email):
-    statement = "SELECT stud_email, stud_resume FROM student s WHERE stud_email = %s"
-    cursor = db_conn.cursor()
-    cursor.execute(statement, (stud_email,))
-    results = cursor.fetchone()
+    # Construct the S3 object key for the resume URL
+    s3_key = f"stud-id-{stud_email}_pdf.pdf"
     
-    if results: 
-        studEmail, resume = results
-        resume_url = "https://" + bucket + ".s3.amazonaws.com/stud-id-" + studEmail + "_pdf.pdf"
+    try:
+        # Initialize the S3 client
+        s3 = boto3.client('s3')
+
+        # Specify the S3 bucket name
+        bucket_name = 'your-bucket-name'
+
+        # Check if the S3 object exists
+        s3.head_object(Bucket=bucket_name, Key=s3_key)
+
+        # If the object exists, construct and return the URL
+        resume_url = f"https://{bucket_name}.s3.amazonaws.com/{s3_key}"
         return jsonify({"resume_url": resume_url})
-    else: 
-        return jsonify({"resume_url": None})
+    except ClientError as e:
+        # Handle the error if the object does not exist
+        if e.response['Error']['Code'] == '404':
+            return jsonify({"resume_url": None})
+        else:
+            # Handle other errors as needed
+            return jsonify({"resume_url": None})
 
 # ADDITIONAL FOR LEC_VIEWSTUDENT
 @app.route('/lecturerViewReport/<stud_email>')
