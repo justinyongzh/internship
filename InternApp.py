@@ -202,7 +202,7 @@ def viewStudentInfo():
         return "Nothing found"
 
 @app.route('/displayStudInfoDetails/<stud_id>')
-def viewStudentInfoDetails(stud_email):
+def viewStudentInfoDetails(stud_id):
     statement = "SELECT * FROM student s WHERE stud_id = %s"
     cursor = db_conn.cursor()
     cursor.execute(statement, (stud_id,))
