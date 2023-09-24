@@ -230,13 +230,18 @@ def displayStudentResume(stud_email):
 
 @app.route("/lecturerDisplayStudInfo", methods=['GET', 'POST'])
 def lecturerViewStudentInfo():
-    statement = "SELECT s.* FROM student s JOIN lecturer l ON s.lec_id = l.lec_id WHERE s.lec_id = 'L0001';"
-    cursor = db_conn.cursor()
-    cursor.execute(statement)
-    result = cursor.fetchall()
-    cursor.close()
+    username = session.get('username')
+
+    if username:
+        statement = "SELECT s.* FROM student s JOIN lecturer l ON s.lec_email = l.lec_email WHERE s.lec_email = %s;"
+        cursor = db_conn.cursor()
+        cursor.execute(statement)
+        result = cursor.fetchall()
+        cursor.close()
     
-    return render_template('lec_displayStudInfo.html', data=result)
+        return render_template('lec_displayStudInfo.html', data=result)
+        
+    return "Lecturer not found"
 
 
 @app.route("/studProfile/", methods=['GET', 'POST'])
@@ -245,7 +250,7 @@ def GetStudInfo():
 
     if username:
         # Fetch student information from the database
-        statement = "SELECT * FROM student WHERE stud_id = %s;"
+        statement = "SELECT * FROM student WHERE stud_email = %s;"
         cursor = db_conn.cursor()
         cursor.execute(statement, (username,))
         student_data = cursor.fetchone()
