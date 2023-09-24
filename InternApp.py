@@ -40,37 +40,21 @@ def homepage():
 def searchStudentPage():
     return render_template('comp_searchStudent.html')
 
-@app.route("/aboutpage", methods=['GET', 'POST'])
-def aboutpage():
-    return render_template('about.html')
-
-@app.route("/featurepage", methods=['GET', 'POST'])
-def featurepage():
-    return render_template('feature.html')
-
-@app.route("/contactpage", methods=['GET', 'POST'])
-def contactpage():
-    return render_template('contact.html')
-
 @app.route("/coursepage", methods=['GET', 'POST'])
 def coursepage():
     return render_template('course.html')
 
-@app.route("/indexpage", methods=['GET', 'POST'])
-def indexpage():
-    return render_template('index.html')
+@app.route("/adminHomePage", methods=['GET', 'POST'])
+def adminHomePage():
+    return render_template('admin_home.html')
 
-@app.route("/teampage", methods=['GET', 'POST'])
-def teampage():
-    return render_template('team.html')
+@app.route("/compHomePage", methods=['GET', 'POST'])
+def compHomePage():
+    return render_template('comp_home.html')
 
-@app.route("/testimonialpage", methods=['GET', 'POST'])
-def testimonialpage():
-    return render_template('testimonial.html')
-
-@app.route("/adminViewCompanyPage", methods=['GET', 'POST'])
-def adminViewCompanyPage():
-    return render_template('admin.html')
+@app.route("/studHomePage", methods=['GET', 'POST'])
+def compHomePage():
+    return render_template('stud_home.html')
 
 @app.route("/ziyuPortfolio", methods=['GET', 'POST'])
 def ziyuPortfolio():
