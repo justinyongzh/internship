@@ -107,7 +107,7 @@ def searchStudProcess():
     rows = cursor.fetchall()
 
     if rows:
-        return render_template('display_searchStudInfo.html', rows=rows)
+        return render_template('comp_displaySearchStudInfo.html', rows=rows)
     else:
         return "Student does not exist."
 
@@ -213,7 +213,7 @@ def viewStudentInfo():
         result = cursor.fetchall()
         cursor.close()
 
-        return render_template('display_studInfo.html', data=result)
+        return render_template('comp_displayStudInfo.html', data=result)
     
     else:
         return "Nothing found"
@@ -225,7 +225,7 @@ def viewStudentInfoDetails(stud_id):
     cursor.execute(statement, (stud_id,))
     result = cursor.fetchone()
             
-    return render_template('display_studInfoDetails.html', student=result)
+    return render_template('comp_displayStudInfoDet.html', student=result)
 
 
 @app.route('/displayStudResume/<stud_id>')
@@ -243,7 +243,7 @@ def displayStudentResume(stud_id):
     else: 
         return "Invalid student."
         
-    return render_template('display_studInfo.html')
+    return render_template('comp_displayStudInfo.html')
 
 @app.route("/lecturerDisplayStudInfo", methods=['GET', 'POST'])
 def lecturerViewStudentInfo():
