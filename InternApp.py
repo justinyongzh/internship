@@ -270,7 +270,7 @@ def lecturerViewStudReport(stud_email):
     results = cursor.fetchone()
     
     if results: 
-        report_url = "https://" + bucket + ".s3.amazonaws.com/stud-id-" + stud_email + "_pdf.pdf"
+        report_url = "https://" + bucket + ".s3.amazonaws.com/stud-id-" + stud_email + "_rpt.pdf"
         return jsonify({"report_url": report_url})
     else: 
         return jsonify({"report_url": None})
