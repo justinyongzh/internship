@@ -228,20 +228,38 @@ def displayStudentResume(stud_email):
         
     return render_template('comp_displayStudInfoDet.html')
 
-@app.route("/lecturerDisplayStudInfo", methods=['GET', 'POST'])
-def lecturerViewStudentInfo():
+# ADDITIONAL FOR LEC_VIEWSTUDENT
+@app.route("/lecturerView", methods=['GET', 'POST'])
+def lecturerViewStudent():
     username = session.get('username')
 
     if username:
-        statement = "SELECT s.* FROM student s JOIN lecturer l ON s.lec_email = l.lec_email WHERE s.lec_email = %s;"
+        statement = "SELECT s.* FROM student s JOIN lecturer l ON l.lec_id = s.lec _id WHERE s.lec_id = %s;"
+
         cursor = db_conn.cursor()
-        cursor.execute(statement)
+        cursor.execute(statement, (username,))
         result = cursor.fetchall()
         cursor.close()
+
+        return render_template('lec_viewStudent.html', data=result)
     
-        return render_template('lec_displayStudInfo.html', data=result)
-        
-    return "Lecturer not found"
+    else:
+        return "Nothing found"
+
+# ADDITIONAL FOR LEC_VIEWSTUDENT
+@app.route('/lecturerViewResume/<stud_id>')
+def lecturerViewStudResume(stud_id):
+    statement = "SELECT stud_id, stud_resume FROM student s WHERE stud_id = %s"
+    cursor = db_conn.cursor()
+    cursor.execute(statement, (stud_id,))
+    results = cursor.fetchone()
+    
+    if results: 
+        studID, resume = results
+        resume_url = "https://" + bucket + ".s3.amazonaws.com/stud_id-" + studID + "_pdf.pdf"
+        return jsonify({"resume_url": resume_url})
+    else: 
+        return jsonify({"resume_url": None})
 
 
 @app.route("/studProfile/", methods=['GET', 'POST'])
