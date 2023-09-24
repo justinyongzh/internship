@@ -150,32 +150,23 @@
         }
 
         function viewReport(stud_email) {
-            // Make an AJAX request to the Python route to fetch the report filename
-            fetch(`/lecturerViewReport/${stud_email}`)
-                .then(response => response.json())
-                .then(data => {
-                    if (data.report_url !== null) {
-                        // Open a new window or modal dialog with the embedded PDF viewer
-                        const windowFeatures = 'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=600,height=800';
-                        const newWindow = window.open('', 'PDF Viewer', windowFeatures);
-                        
-                        // Use the report URL to display the PDF in an iframe
-                        newWindow.document.write(`
-                            <html>
-                            <head>
-                                <title>Report</title>
-                            </head>
-                            <body>
-                                <iframe src="${data.report_url}" width="100%" height="100%"></iframe>
-                            </body>
-                            </html>
-                        `);
-                    } else {
-                        alert("Report not found.");
-                    }
-                })
-                .catch(error => console.error(error));
+    // Make an AJAX request to check if the report exists
+    $.ajax({
+        type: "HEAD",
+        url: `/check_report?report_key=${reportKey}`,
+        success: function () {
+            // If the report exists, set the iframe source
+            const iframe = document.getElementById("reportFrame");
+            iframe.src = `/view_report?report_key=${reportKey}`;
+        },
+        error: function () {
+            // If the report does not exist, display an alert
+            alert("Report not found.");
         }
+    });
+}
+
+
     </script>
 </body>
 
