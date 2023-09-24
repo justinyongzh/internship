@@ -189,8 +189,7 @@ def viewStudentInfo():
     username = session.get('username')
 
     if username:
-        # statement = "SELECT s.* FROM student s JOIN company c ON s.com_email = c.com_email WHERE s.com_email = %s;"
-        statement = "SELECT s.* FROM student s JOIN company c ON s.com_id = c.com_id WHERE s.com_id = %s;"
+        statement = "SELECT s.* FROM student s JOIN company c ON s.com_email = c.com_email WHERE s.com_email = %s;"
 
         cursor = db_conn.cursor()
         cursor.execute(statement, (username,))
@@ -202,32 +201,32 @@ def viewStudentInfo():
     else:
         return "Nothing found"
 
-@app.route('/displayStudInfoDetails/<stud_id>')
-def viewStudentInfoDetails(stud_id):
-    statement = "SELECT * FROM student s WHERE stud_id = %s"
+@app.route('/displayStudInfoDetails/<stud_email>')
+def viewStudentInfoDetails(stud_email):
+    statement = "SELECT * FROM student s WHERE stud_email = %s"
     cursor = db_conn.cursor()
-    cursor.execute(statement, (stud_id,))
+    cursor.execute(statement, (stud_email,))
     result = cursor.fetchone()
-            
+    
     return render_template('comp_displayStudInfoDet.html', student=result)
 
 
-@app.route('/displayStudResume/<stud_id>')
-def displayStudentResume(stud_id):
-    statement = "SELECT stud_id, stud_resume FROM student s WHERE stud_id = %s"
+@app.route('/displayStudResume/<stud_email>')
+def displayStudentResume(stud_email):
+    statement = "SELECT stud_id, stud_email, stud_resume FROM student s WHERE stud_email = %s"
     cursor = db_conn.cursor()
-    cursor.execute(statement, (stud_id,))
+    cursor.execute(statement, (stud_email,))
     results = cursor.fetchone()
     
     if results: 
-        studID, resume = results
+        studID, studEmail, resume = results
         resume = "https://" + bucket + ".s3.amazonaws.com/stud_id-" + studID + "_pdf.pdf"
         return render_template('comp_displayStudResume.html', results=results, resume=resume)
         
     else: 
         return "Invalid student."
         
-    return render_template('comp_displayStudInfo.html')
+    return render_template('comp_displayStudInfoDet.html')
 
 @app.route("/lecturerDisplayStudInfo", methods=['GET', 'POST'])
 def lecturerViewStudentInfo():
