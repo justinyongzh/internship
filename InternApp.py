@@ -272,28 +272,6 @@ def GetStudInfo():
 
     return "Student not found"
 
-@app.route("/preview/<stud_id>")
-def preview_file(stud_id):
-    # Fetch the resume BLOB from the database
-    statement = "SELECT stud_resume FROM Student WHERE stud_id = %s"
-    cursor = db_conn.cursor()
-    cursor.execute(statement, (stud_id,))
-    resume_data = cursor.fetchone()
-    cursor.close()
-
-    if resume_data:
-        # Save the resume to a temporary file
-        resume_blob = resume_data[0]
-        temp_file_path = "temp_resume_" + stud_id + ".pdf"
-
-        with open(temp_file_path, 'wb') as file:
-            file.write(resume_blob)
-
-        # Send the file for download
-        return send_file(temp_file_path, as_attachment=True)
-    else:
-        return "Resume not found"
-
 
 @app.route("/displayComInfo", methods=['GET', 'POST'])
 def viewCompanyInfo():
@@ -411,8 +389,6 @@ def EditStudProfile(stud_id):
 
                 except Exception as e:
                     return str(e)
-
-
 
             flash("Student profile updated successfully", "success")
             return redirect(url_for('GetStudInfo', stud_id=stud_id))
