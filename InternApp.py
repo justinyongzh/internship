@@ -255,7 +255,7 @@ def lecturerViewStudResume(stud_id):
     
     if results: 
         studID, resume = results
-        resume_url = "https://" + bucket + ".s3.amazonaws.com/stud_id-" + studID + "_pdf.pdf"
+        resume_url = "https://" + bucket + ".s3.amazonaws.com/stud-id-" + studID + "_pdf.pdf"
         return jsonify({"resume_url": resume_url})
     else: 
         return jsonify({"resume_url": None})
