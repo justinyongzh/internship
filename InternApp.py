@@ -258,7 +258,7 @@ def lecturerViewStudResume(stud_email):
         s3 = boto3.client('s3')
 
         # Specify the S3 bucket name
-        bucket_name = 'your-bucket-name'
+        bucket_name = 'diongziyu-bucket'
 
         # Check if the S3 object exists
         s3.head_object(Bucket=bucket_name, Key=s3_key)
