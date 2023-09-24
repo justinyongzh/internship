@@ -201,11 +201,11 @@ def viewStudentInfo():
     else:
         return "Nothing found"
 
-@app.route('/displayStudInfoDetails/<stud_email>')
+@app.route('/displayStudInfoDetails/<stud_id>')
 def viewStudentInfoDetails(stud_email):
-    statement = "SELECT * FROM student s WHERE stud_email = %s"
+    statement = "SELECT * FROM student s WHERE stud_id = %s"
     cursor = db_conn.cursor()
-    cursor.execute(statement, (stud_email,))
+    cursor.execute(statement, (stud_id,))
     result = cursor.fetchone()
     
     return render_template('comp_displayStudInfoDet.html', student=result)
