@@ -153,11 +153,11 @@
     // Make an AJAX request to check if the report exists
     $.ajax({
         type: "HEAD",
-        url: `/check_report?report_key=${reportKey}`,
+        url: `/check_report?report_key=${stud_email}`,
         success: function () {
             // If the report exists, set the iframe source
             const iframe = document.getElementById("reportFrame");
-            iframe.src = `/view_report?report_key=${reportKey}`;
+            iframe.src = `/view_report?report_key=${stud_email}`;
         },
         error: function () {
             // If the report does not exist, display an alert
