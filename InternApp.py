@@ -246,6 +246,8 @@ def lecturerViewStudent():
         return "Nothing found"
 
 # ADDITIONAL FOR LEC_VIEWSTUDENT
+from urllib.parse import urlparse
+
 @app.route('/lecturerViewResume/<stud_email>')
 def lecturerViewStudResume(stud_email):
     statement = "SELECT stud_email, stud_resume FROM student s WHERE stud_email = %s"
@@ -253,11 +255,17 @@ def lecturerViewStudResume(stud_email):
     cursor.execute(statement, (stud_email,))
     results = cursor.fetchone()
     
-    if results: 
+    if results:
         studEmail, resume = results
         resume_url = "https://" + bucket + ".s3.amazonaws.com/stud-id-" + studEmail + "_pdf.pdf"
-        return jsonify({"resume_url": resume_url})
-    else: 
+
+        # Check if the constructed URL is valid
+        parsed_url = urlparse(resume_url)
+        if parsed_url.scheme and parsed_url.netloc:
+            return jsonify({"resume_url": resume_url})
+        else:
+            return jsonify({"resume_url": None})
+    else:
         return jsonify({"resume_url": None})
 
 
