@@ -72,21 +72,9 @@
             </button>
             <div class="collapse navbar-collapse justify-content-between px-lg-3" id="navbarCollapse">
                 <div class="navbar-nav mx-auto py-0">
-                    <a href="{{url_for('homepage')}}" class="nav-item nav-link">Home</a>
-                    <a href="{{url_for('aboutpage')}}" class="nav-item nav-link">About</a>
-                    <a href="{{url_for('coursepage')}}" class="nav-item nav-link">Courses</a>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle active" data-toggle="dropdown">Pages</a>
-                        <div class="dropdown-menu m-0">
-                            <a href="detail.html" class="dropdown-item">Course Detail</a>
-                            <a href="{{url_for('featurepage')}}" class="dropdown-item active">Our Features</a>
-                            <a href="{{url_for('teampage')}}" class="dropdown-item">Instructors</a>
-                            <a href="{{url_for('testimonialpage')}}" class="dropdown-item">Testimonial</a>
-                        </div>
-                    </div>
-                    <a href="{{url_for('contactpage')}}" class="nav-item nav-link">Contact</a>
+                    <a href="{{url_for('homepage')}}" class="nav-item nav-link" style="color: black;">Home</a>
                 </div>
-                <a href="" class="btn btn-primary py-2 px-4 d-none d-lg-block">Join Us</a>
+                <a href="/logout" class="btn btn-primary py-2 px-4 d-none d-lg-block">Log Out</a>
             </div>
         </nav>
     </div>
@@ -94,6 +82,7 @@
 
 
     <!-- Header Start -->
+    <a href="/displayStudInfo" class="returnComp_button btn" id="returnComp-id">CLICK HERE to go back</a>
     <div class="jumbotron jumbotron-fluid page-header position-relative" style="margin-bottom: 90px;">
         <div class="container text-center py-5">
             <h6 class="text-white display-1">Search a student</h6>
