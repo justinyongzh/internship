@@ -38,7 +38,7 @@ def homepage():
 
 @app.route("/searchStudentPage", methods=['GET', 'POST'])
 def searchStudentPage():
-    return render_template('search_student.html')
+    return render_template('comp_searchStudent.html')
 
 @app.route("/aboutpage", methods=['GET', 'POST'])
 def aboutpage():
