@@ -247,7 +247,7 @@ def lecturerViewStudent():
 
 # ADDITIONAL FOR LEC_VIEWSTUDENT
 @app.route('/lecturerViewResume/<stud_email>')
-def lecturerViewStudResume(stud_id):
+def lecturerViewStudResume(stud_email):
     statement = "SELECT stud_email, stud_resume FROM student s WHERE stud_email = %s"
     cursor = db_conn.cursor()
     cursor.execute(statement, (stud_email,))
