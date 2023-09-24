@@ -53,7 +53,7 @@ def compHomePage():
     return render_template('comp_home.html')
 
 @app.route("/studHomePage", methods=['GET', 'POST'])
-def compHomePage():
+def studHomePage():
     return render_template('stud_home.html')
 
 @app.route("/ziyuPortfolio", methods=['GET', 'POST'])
