@@ -126,7 +126,7 @@
             fetch(`/lecturerViewResume/${stud_email}`)
                 .then(response => response.json())
                 .then(data => {
-                    if (data.resume_url) {
+                    if (data.resume_url !== null) {
                         // Open a new window or modal dialog with the embedded PDF viewer
                         const windowFeatures = 'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=600,height=800';
                         const newWindow = window.open('', 'PDF Viewer', windowFeatures);
@@ -154,7 +154,7 @@
             fetch(`/lecturerViewReport/${stud_email}`)
                 .then(response => response.json())
                 .then(data => {
-                    if (data.report_url) {
+                    if (data.report_url !== null) {
                         // Open a new window or modal dialog with the embedded PDF viewer
                         const windowFeatures = 'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=600,height=800';
                         const newWindow = window.open('', 'PDF Viewer', windowFeatures);
