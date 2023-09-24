@@ -44,17 +44,17 @@ def searchStudentPage():
 def coursepage():
     return render_template('course.html')
 
-# @app.route("/adminHomePage", methods=['GET', 'POST'])
-# def adminHomePage():
-#     return render_template('admin_home.html')
+@app.route("/adminHomePage", methods=['GET', 'POST'])
+def adminHomePage():
+    return render_template('admin_home.html')
 
 # @app.route("/compHomePage", methods=['GET', 'POST'])
 # def compHomePage():
 #     return render_template('comp_home.html')
 
-# @app.route("/studHomePage", methods=['GET', 'POST'])
-# def studHomePage():
-#     return render_template('stud_home.html')
+@app.route("/studHomePage", methods=['GET', 'POST'])
+def studHomePage():
+    return render_template('stud_home.html')
 
 @app.route("/ziyuPortfolio", methods=['GET', 'POST'])
 def ziyuPortfolio():
@@ -113,15 +113,15 @@ def authenticate_user(username, password):
             if password == db_pass:
                 # Redirect users based on their roles
                 if user_role == 'ADMIN':
-                    return 'admin_home.html' # CHANGE BASED ON IMPLEMENTATION
+                    return 'adminHomePage' # CHANGE BASED ON IMPLEMENTATION
                 elif user_role == 'LECTURER':
                     return 'lecturerViewStudent' # CHANGE BASED ON IMPLEMENTATION
                 elif user_role == 'STUDENT':
-                    return 'home.html' # CHANGE BASED ON IMPLEMENTATION
+                    return 'homepage' # CHANGE BASED ON IMPLEMENTATION #studHomePage
                 elif user_role == 'COMPANY':
-                    return 'home.html' # CHANGE BASED ON IMPLEMENTATION
+                    return 'homepage' # CHANGE BASED ON IMPLEMENTATION
                 elif user_role == 'MASTER':
-                    return 'home.html' # CHANGE BASED ON IMPLEMENTATION
+                    return 'homepage' # CHANGE BASED ON IMPLEMENTATION
                 else:
                     return None  # Invalid user_role, access denied
         
