@@ -261,6 +261,22 @@ def lecturerViewStudResume(stud_id):
         return jsonify({"resume_url": None})
 
 
+# ADDITIONAL FOR LEC_VIEWSTUDENT
+@app.route('/lecturerViewReport/<stud_email>')
+def lecturerViewStudReport(stud_email):
+    statement = "SELECT stud_email, stud_report FROM student s WHERE stud_email = %s"
+    cursor = db_conn.cursor()
+    cursor.execute(statement, (stud_email,))
+    results = cursor.fetchone()
+    
+    if results: 
+        studEmail, report = results
+        report_url = "https://" + bucket + ".s3.amazonaws.com/stud-id-" + studEmail + "_pdf.pdf"
+        return jsonify({"report_url": report_url})
+    else: 
+        return jsonify({"report_url": None})
+
+
 @app.route("/studProfile/", methods=['GET', 'POST'])
 def GetStudInfo():
     username = session.get('username')
