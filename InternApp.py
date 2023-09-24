@@ -219,7 +219,7 @@ def displayStudentResume(stud_id):
     
     if results: 
         studID, studEmail, resume = results
-        resume = "https://" + bucket + ".s3.amazonaws.com/stud_id-" + studID + "_pdf.pdf"
+        resume = "https://" + bucket + ".s3.amazonaws.com/stud-id-" + studID + "_pdf.pdf"
         return render_template('comp_displayStudResume.html', results=results, resume=resume)
         
     else: 
