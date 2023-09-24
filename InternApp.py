@@ -274,11 +274,9 @@ def lecturerViewStudReport(stud_email):
     else: 
         return jsonify({"report_url": None})
 
-from flask import Flask, render_template, request, jsonify
-import boto3
+
 from botocore.exceptions import ClientError
 
-app = Flask(__name__)
 
 # Initialize the S3 client
 s3 = boto3.client('s3')
