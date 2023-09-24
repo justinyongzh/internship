@@ -274,38 +274,6 @@ def lecturerViewStudReport(stud_email):
     else: 
         return jsonify({"report_url": None})
 
-
-from botocore.exceptions import ClientError
-
-
-# Initialize the S3 client
-s3 = boto3.client('s3')
-
-# Replace with your S3 bucket name
-bucket_name = 'diongziyu-bucket'
-
-@app.route('/check_report', methods=['HEAD'])
-def check_report():
-    report_key = request.args.get('report_key')
-    try:
-        # Check if the S3 object exists
-        s3.head_object(Bucket=bucket_name, Key=report_key)
-        return "", 200  # Report exists, return success status code
-    except ClientError as e:
-        if e.response['Error']['Code'] == '404':
-            return "", 404  # Report not found, return not found status code
-        else:
-            return "", 500  # Handle other errors as needed
-
-@app.route('/view_report', methods=['GET'])
-def view_report():
-    report_key = request.args.get('report_key')
-    return render_template('report.html', report_key=report_key)
-
-if __name__ == '__main__':
-    app.run(debug=True)
-
-
 @app.route("/studProfile/", methods=['GET', 'POST'])
 def GetStudInfo():
     username = session.get('username')
