@@ -150,7 +150,7 @@ def login_post():
         session['username'] = username
         
         # Redirect to the appropriate page based on user role
-        return render_template(redirect_page)
+        return redirect(url_for(redirect_page))
     else:
         return "Access denied"
     
