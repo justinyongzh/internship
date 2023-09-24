@@ -77,8 +77,8 @@
                 <td>{{ row[8] }}</td>
                 <td>
                     <div class="lect-button-container">
-                        <button class="lect-rounded-button" onclick="viewResume('{{ row[0] }}')">View Resume</button>
-                        <button class="lect-rounded-button" onclick="openPDF('test.pdf')">View Progress Report</button>
+                        <button class="lect-rounded-button" onclick="viewResume('{{ row[4] }}')">View Resume</button>
+                        <button class="lect-rounded-button" onclick="viewReport('{{ row[4] }}')">View Progress Report</button>
                     </div>
                 </td>
             </tr>
@@ -121,9 +121,9 @@
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
     <script>
-        function viewResume(stud_id) {
+        function viewResume(stud_email) {
             // Make an AJAX request to the Python route to fetch the resume filename
-            fetch(`/lecturerViewResume/${stud_id}`)
+            fetch(`/lecturerViewResume/${stud_email}`)
                 .then(response => response.json())
                 .then(data => {
                     if (data.resume_url) {
@@ -144,6 +144,34 @@
                         `);
                     } else {
                         alert("Resume not found.");
+                    }
+                })
+                .catch(error => console.error(error));
+        }
+
+        function viewReport(stud_email) {
+            // Make an AJAX request to the Python route to fetch the report filename
+            fetch(`/lecturerViewReport/${stud_email}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.report_url) {
+                        // Open a new window or modal dialog with the embedded PDF viewer
+                        const windowFeatures = 'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=600,height=800';
+                        const newWindow = window.open('', 'PDF Viewer', windowFeatures);
+                        
+                        // Use the report URL to display the PDF in an iframe
+                        newWindow.document.write(`
+                            <html>
+                            <head>
+                                <title>Report</title>
+                            </head>
+                            <body>
+                                <iframe src="${data.report_url}" width="100%" height="100%"></iframe>
+                            </body>
+                            </html>
+                        `);
+                    } else {
+                        alert("Report not found.");
                     }
                 })
                 .catch(error => console.error(error));
