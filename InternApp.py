@@ -44,17 +44,17 @@ def searchStudentPage():
 def coursepage():
     return render_template('course.html')
 
-@app.route("/adminHomePage", methods=['GET', 'POST'])
-def adminHomePage():
-    return render_template('admin_home.html')
+# @app.route("/adminHomePage", methods=['GET', 'POST'])
+# def adminHomePage():
+#     return render_template('admin_home.html')
 
-@app.route("/compHomePage", methods=['GET', 'POST'])
-def compHomePage():
-    return render_template('comp_home.html')
+# @app.route("/compHomePage", methods=['GET', 'POST'])
+# def compHomePage():
+#     return render_template('comp_home.html')
 
-@app.route("/studHomePage", methods=['GET', 'POST'])
-def studHomePage():
-    return render_template('stud_home.html')
+# @app.route("/studHomePage", methods=['GET', 'POST'])
+# def studHomePage():
+#     return render_template('stud_home.html')
 
 @app.route("/ziyuPortfolio", methods=['GET', 'POST'])
 def ziyuPortfolio():
