@@ -210,12 +210,11 @@ def viewStudentInfoDetails(stud_email):
     
     return render_template('comp_displayStudInfoDet.html', student=result)
 
-
-@app.route('/displayStudResume/<stud_email>')
-def displayStudentResume(stud_email):
-    statement = "SELECT stud_id, stud_email, stud_resume FROM student s WHERE stud_email = %s"
+@app.route('/displayStudResume/<stud_id>')
+def displayStudentResume(stud_id):
+    statement = "SELECT stud_id, stud_email, stud_resume FROM student s WHERE stud_id = %s"
     cursor = db_conn.cursor()
-    cursor.execute(statement, (stud_email,))
+    cursor.execute(statement, (stud_id,))
     results = cursor.fetchone()
     
     if results: 
@@ -234,7 +233,7 @@ def lecturerViewStudent():
     username = session.get('username')
 
     if username:
-        statement = "SELECT s.* FROM student s JOIN lecturer l ON l.lec_id = s.lec _id WHERE s.lec_id = %s;"
+        statement = "SELECT s.* FROM student s JOIN lecturer l ON l.lec_email = s.lec_email WHERE s.lec_email = %s;"
 
         cursor = db_conn.cursor()
         cursor.execute(statement, (username,))
