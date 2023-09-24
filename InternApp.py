@@ -228,38 +228,24 @@ def displayStudentResume(stud_email):
     return render_template('comp_displayStudInfoDet.html')
 
 # ADDITIONAL FOR LEC_VIEWSTUDENT
-import boto3
-from botocore.exceptions import ClientError
+@app.route("/lecturerView", methods=['GET', 'POST'])
+def lecturerViewStudent():
+    username = session.get('username')
 
-@app.route('/lecturerViewResume/<stud_email>')
-def lecturerViewStudResume(stud_email):
-    # Construct the S3 object key
-    s3_key = f"stud-id-{stud_email}_pdf.pdf"
+    if username:
+        statement = "SELECT s.* FROM student s JOIN lecturer l ON l.lec_email = s.lec_email WHERE s.lec_email = %s;"
+
+        cursor = db_conn.cursor()
+        cursor.execute(statement, (username,))
+        result = cursor.fetchall()
+        cursor.close()
+
+        return render_template('lec_viewStudent.html', data=result)
     
-    try:
-        # Initialize the S3 client
-        s3 = boto3.client('s3')
-
-        # Specify the S3 bucket name
-        bucket_name = 'diongziyu-bucket'
-
-        # Check if the S3 object exists
-        s3.head_object(Bucket=bucket_name, Key=s3_key)
-
-        # If the object exists, construct and return the URL
-        resume_url = f"https://{bucket_name}.s3.amazonaws.com/{s3_key}"
-        return jsonify({"resume_url": resume_url})
-    except ClientError as e:
-        # Handle the error if the object does not exist
-        if e.response['Error']['Code'] == '404':
-            return jsonify({"resume_url": None})
-        else:
-            # Handle other errors as needed
-            return jsonify({"resume_url": None})
+    else:
+        return "Nothing found"
 
 # ADDITIONAL FOR LEC_VIEWSTUDENT
-from urllib.parse import urlparse
-
 @app.route('/lecturerViewResume/<stud_email>')
 def lecturerViewStudResume(stud_email):
     statement = "SELECT stud_email, stud_resume FROM student s WHERE stud_email = %s"
@@ -267,17 +253,11 @@ def lecturerViewStudResume(stud_email):
     cursor.execute(statement, (stud_email,))
     results = cursor.fetchone()
     
-    if results:
+    if results: 
         studEmail, resume = results
         resume_url = "https://" + bucket + ".s3.amazonaws.com/stud-id-" + studEmail + "_pdf.pdf"
-
-        # Check if the constructed URL is valid
-        parsed_url = urlparse(resume_url)
-        if parsed_url.scheme and parsed_url.netloc:
-            return jsonify({"resume_url": resume_url})
-        else:
-            return jsonify({"resume_url": None})
-    else:
+        return jsonify({"resume_url": resume_url})
+    else: 
         return jsonify({"resume_url": None})
 
 
@@ -294,7 +274,6 @@ def lecturerViewStudReport(stud_email):
         return jsonify({"report_url": report_url})
     else: 
         return jsonify({"report_url": None})
-
 
 @app.route("/studProfile/", methods=['GET', 'POST'])
 def GetStudInfo():
