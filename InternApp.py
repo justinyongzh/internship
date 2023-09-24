@@ -201,25 +201,25 @@ def viewStudentInfo():
     else:
         return "Nothing found"
 
-@app.route('/displayStudInfoDetails/<stud_id>')
-def viewStudentInfoDetails(stud_id):
-    statement = "SELECT * FROM student s WHERE stud_id = %s"
+@app.route('/displayStudInfoDetails/<stud_email>')
+def viewStudentInfoDetails(stud_email):
+    statement = "SELECT * FROM student s WHERE stud_email = %s"
     cursor = db_conn.cursor()
-    cursor.execute(statement, (stud_id,))
+    cursor.execute(statement, (stud_email,))
     result = cursor.fetchone()
     
     return render_template('comp_displayStudInfoDet.html', student=result)
 
-@app.route('/displayStudResume/<stud_id>')
-def displayStudentResume(stud_id):
-    statement = "SELECT stud_id, stud_email, stud_resume FROM student s WHERE stud_id = %s"
+@app.route('/displayStudResume/<stud_email>')
+def displayStudentResume(stud_email):
+    statement = "SELECT stud_email, stud_resume FROM student s WHERE stud_email = %s"
     cursor = db_conn.cursor()
-    cursor.execute(statement, (stud_id,))
+    cursor.execute(statement, (stud_email,))
     results = cursor.fetchone()
     
     if results: 
-        studID, studEmail, resume = results
-        resume = "https://" + bucket + ".s3.amazonaws.com/stud-id-" + studID + "_pdf.pdf"
+        studEmail, resume = results
+        resume = "https://" + bucket + ".s3.amazonaws.com/stud-id-" + studEmail + "_pdf.pdf"
         return render_template('comp_displayStudResume.html', results=results, resume=resume)
         
     else: 
@@ -246,16 +246,16 @@ def lecturerViewStudent():
         return "Nothing found"
 
 # ADDITIONAL FOR LEC_VIEWSTUDENT
-@app.route('/lecturerViewResume/<stud_id>')
+@app.route('/lecturerViewResume/<stud_email>')
 def lecturerViewStudResume(stud_id):
-    statement = "SELECT stud_id, stud_resume FROM student s WHERE stud_id = %s"
+    statement = "SELECT stud_email, stud_resume FROM student s WHERE stud_email = %s"
     cursor = db_conn.cursor()
-    cursor.execute(statement, (stud_id,))
+    cursor.execute(statement, (stud_email,))
     results = cursor.fetchone()
     
     if results: 
-        studID, resume = results
-        resume_url = "https://" + bucket + ".s3.amazonaws.com/stud-id-" + studID + "_pdf.pdf"
+        studEmail, resume = results
+        resume_url = "https://" + bucket + ".s3.amazonaws.com/stud-id-" + studEmail + "_pdf.pdf"
         return jsonify({"resume_url": resume_url})
     else: 
         return jsonify({"resume_url": None})
